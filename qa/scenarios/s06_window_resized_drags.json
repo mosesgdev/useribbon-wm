@@ -1,0 +1,167 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 1001,
+  "app": "Safari",
+  "title": "Safari window 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 1002,
+  "app": "Slack",
+  "title": "Slack window 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 1003,
+  "app": "Mail",
+  "title": "Mail window 3",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 942,
+   "h": 600
+  }
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 944,
+   "h": 600
+  }
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 600
+  }
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1000,
+   "h": 600
+  }
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1200,
+   "h": 600
+  }
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 640,
+   "h": 600
+  }
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_resized",
+  "id": 2,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 420,
+   "h": 600
+  }
+ },
+ {
+  "type": "window_resized",
+  "id": 2,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 300,
+   "h": 600
+  }
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_resized",
+  "id": 99,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 500,
+   "h": 600
+  }
+ },
+ {
+  "type": "query"
+ }
+]

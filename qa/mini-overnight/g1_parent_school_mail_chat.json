@@ -1,0 +1,771 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 2001,
+  "app": "Safari",
+  "title": "Schulportal - Elternbereich",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 2002,
+  "app": "Mail",
+  "title": "Inbox (14)",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 2003,
+  "app": "Calendar",
+  "title": "Week view",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 4,
+  "pid": 2004,
+  "app": "Messages",
+  "title": "Anna (Klasse 3b)",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "window_resized",
+  "id": 2,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1000,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "window_added",
+  "id": 5,
+  "pid": 2005,
+  "app": "Safari",
+  "title": "Elternbrief.pdf",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 6,
+  "pid": 2006,
+  "app": "Preview",
+  "title": "Elternbrief.pdf",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "window_added",
+  "id": 7,
+  "pid": 2007,
+  "app": "Notes",
+  "title": "Einkaufsliste",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": true
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "window_added",
+  "id": 8,
+  "pid": 2008,
+  "app": "Calendar",
+  "title": "Calendar window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "window_focused",
+  "id": 4
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_removed",
+  "id": 3
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_focused",
+  "id": 6
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_removed",
+  "id": 6
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 4
+ },
+ {
+  "type": "window_resized",
+  "id": 5,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1146,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_focused",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_focused",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_resized",
+  "id": 4,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 702,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 9,
+  "pid": 2009,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 4
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "window_focused",
+  "id": 9
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "window_focused",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_resized",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 817,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_resized",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 330,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "window_resized",
+  "id": 2,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1696,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_focused",
+  "id": 9
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_removed",
+  "id": 5
+ },
+ {
+  "type": "window_removed",
+  "id": 9
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 4
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 1
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 10,
+  "pid": 2010,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 3
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_down"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "move_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_removed",
+  "id": 10
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 4
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "window_resized",
+  "id": 2,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 696,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "window_removed",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_focused",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_resized",
+  "id": 2,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1667,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_removed",
+  "id": 1
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_focused",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "window_added",
+  "id": 11,
+  "pid": 2011,
+  "app": "Safari",
+  "title": "Safari window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ }
+]

@@ -1,0 +1,1 @@
+b_student_macbook#58: JUMP -1524 px for one focus_left (column ~1488 px)

@@ -1,0 +1,6 @@
+build/
+app/.build/
+.build/
+release.env
+releases/
+*.key

@@ -1,0 +1,626 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 3840,
+   "h": 1170
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 2001,
+  "app": "Zed",
+  "title": "ribbon \u2014 SPEC.md",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 2002,
+  "app": "Terminal",
+  "title": "zsh \u2014 ribbon",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "window_focused",
+  "id": 1
+ },
+ {
+  "type": "command",
+  "name": "focus_down"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 2003,
+  "app": "Chrome",
+  "title": "Layout docs",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 4,
+  "pid": 2004,
+  "app": "Chrome",
+  "title": "PR #41 review",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 5,
+  "pid": 2005,
+  "app": "Slack",
+  "title": "#ribbon-dev",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 1
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 4
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1400,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "window_added",
+  "id": 6,
+  "pid": 2006,
+  "app": "Preview",
+  "title": "design.pdf",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "move_left"
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "window_added",
+  "id": 7,
+  "pid": 2007,
+  "app": "Terminal",
+  "title": "logs",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 8,
+  "pid": 2008,
+  "app": "Zed",
+  "title": "Zed window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_focused",
+  "id": 4
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 4
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_resized",
+  "id": 6,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1084,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_focused",
+  "id": 6
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 5
+ },
+ {
+  "type": "command",
+  "name": "focus_down"
+ },
+ {
+  "type": "command",
+  "name": "focus_down"
+ },
+ {
+  "type": "window_focused",
+  "id": 7
+ },
+ {
+  "type": "window_resized",
+  "id": 7,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 326,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 4
+ },
+ {
+  "type": "window_focused",
+  "id": 6
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_down"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_removed",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_focused",
+  "id": 4
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 6
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "window_added",
+  "id": 9,
+  "pid": 2009,
+  "app": "Slack",
+  "title": "Slack window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "window_resized",
+  "id": 9,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 3544,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "window_added",
+  "id": 10,
+  "pid": 2010,
+  "app": "Terminal",
+  "title": "Terminal window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_resized",
+  "id": 10,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 2128,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_removed",
+  "id": 3
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "focus_down"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_added",
+  "id": 11,
+  "pid": 2011,
+  "app": "Zed",
+  "title": "Zed window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_focused",
+  "id": 9
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_removed",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_removed",
+  "id": 4
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 4
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "window_focused",
+  "id": 9
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ }
+]

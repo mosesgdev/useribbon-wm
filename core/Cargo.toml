@@ -1,0 +1,32 @@
+[package]
+name = "ribbon_core"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+description = "Ribbon scrolling window manager: pure layout engine with a C ABI"
+
+[lib]
+name = "ribbon_core"
+crate-type = ["staticlib", "rlib"]
+
+[[bin]]
+name = "ribbon-sim"
+path = "src/bin/ribbon-sim.rs"
+
+[features]
+# The Plus edition, which is not in this repo (EDITIONS.md). Declared so the cfg(feature = "plus") checks compile;
+# building with it stops with an error.
+plus = []
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+proptest = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+# panic = "abort" is deliberately NOT set: lib.rs catches panics at the FFI boundary.

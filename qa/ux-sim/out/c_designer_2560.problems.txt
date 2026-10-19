@@ -1,0 +1,4 @@
+c_designer_2560#15: JUMP -2572 px for one focus_left (column ~2536 px)
+c_designer_2560#32: JUMP -2571 px for one focus_left (column ~2536 px)
+c_designer_2560#95: JUMP +2572 px for one focus_right (column ~2536 px)
+c_designer_2560#109: JUMP -2572 px for one focus_left (column ~2536 px)

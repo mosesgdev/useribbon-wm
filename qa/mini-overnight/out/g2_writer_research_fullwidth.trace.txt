@@ -1,0 +1,150 @@
+#000 display 0,30 1920x1050     focus=None fidx=None show=Y chg=0 shift=0 | 
+#001 add 1 Pages                focus=1 fidx=0 show=Y chg=1 [1] shift=0 | 1@12+942
+#002 add 2 Safari               focus=2 fidx=1 show=Y chg=1 [2] shift=0 | 1@12+942 2@966+942
+#003 add 3 Safari               focus=3 fidx=2 show=Y chg=3 [1, 2, 3] shift=965 | 1@-941+942(off) 2@12+942 3@966+942
+#004 add 4 Safari               focus=4 fidx=3 show=Y chg=3 [2, 3, 4] shift=966 | 1@-941+942(off) 2@-941+942(off) 3@12+942 4@966+942
+#005 add 5 Notes FLOAT          focus=None fidx=3 show=Y chg=0 shift=0 | 1@-941+942(off) 2@-941+942(off) 3@12+942 4@966+942
+#006 cmd toggle_full            focus=None fidx=3 show=Y chg=2 [3, 4] shift=965 | 1@-941+942(off) 2@-941+942(off) 3@-941+942(off) 4@12+1896
+#007 cmd focus_right            focus=None fidx=3 show=Y chg=0 shift=0 | 1@-941+942(off) 2@-941+942(off) 3@-941+942(off) 4@12+1896
+#008 cmd focus_right            focus=None fidx=3 show=Y chg=0 shift=0 | 1@-941+942(off) 2@-941+942(off) 3@-941+942(off) 4@12+1896
+#009 cmd toggle_full            focus=None fidx=3 show=Y chg=2 [3, 4] shift=-965 | 1@-941+942(off) 2@-941+942(off) 3@12+942 4@966+942
+#010 cmd cycle_width            focus=None fidx=3 show=Y chg=2 [3, 4] shift=322 | 1@-941+942(off) 2@-941+942(off) 3@-307+942 4@647+1261
+#011 cmd cycle_width_back       focus=None fidx=3 show=Y chg=2 [3, 4] shift=-322 | 1@-941+942(off) 2@-941+942(off) 3@12+942 4@966+942
+#012 cmd focus_index(1)         focus=1 fidx=0 show=Y chg=4 [1, 2, 3, 4] shift=-1932 | 1@12+942 2@966+942 3@1919+942(off) 4@1919+942(off)
+#013 cmd toggle_full            focus=None fidx=0 show=Y chg=2 [1, 2] shift=0 | 1@12+1896 2@1919+942(off) 3@1919+942(off) 4@1919+942(off)
+#014 cmd toggle_full            focus=None fidx=0 show=Y chg=2 [1, 2] shift=0 | 1@12+942 2@966+942 3@1919+942(off) 4@1919+942(off)
+#015 cmd focus_right            focus=2 fidx=1 show=Y chg=0 shift=0 | 1@12+942 2@966+942 3@1919+942(off) 4@1919+942(off)
+#016 cmd focus_left             focus=1 fidx=0 show=Y chg=0 shift=0 | 1@12+942 2@966+942 3@1919+942(off) 4@1919+942(off)
+#017 cmd focus_right            focus=2 fidx=1 show=Y chg=0 shift=0 | 1@12+942 2@966+942 3@1919+942(off) 4@1919+942(off)
+#018 cmd focus_right            focus=3 fidx=2 show=Y chg=3 [1, 2, 3] shift=966 | 1@-941+942(off) 2@12+942 3@966+942 4@1919+942(off)
+#019 cmd cycle_width            focus=None fidx=2 show=Y chg=2 [2, 3] shift=322 | 1@-941+942(off) 2@-307+942 3@647+1261 4@1919+942(off)
+#020 cmd redo                   focus=3 fidx=2 show=Y chg=0 shift=0 | 1@-941+942(off) 2@-307+942 3@647+1261 4@1919+942(off)
+#021 add 6 Pages                focus=6 fidx=3 show=Y chg=3 [2, 3, 6] shift=965 | 1@-941+942(off) 2@-941+942(off) 3@-307+1261 6@966+942 4@1919+942(off)
+#022 cmd focus_right            focus=4 fidx=4 show=Y chg=3 [3, 6, 4] shift=965 | 3@-1260+1261(off) 1@-941+942(off) 2@-941+942(off) 6@12+942 4@966+942
+#023 cmd toggle_full            focus=None fidx=4 show=Y chg=2 [6, 4] shift=966 | 3@-1260+1261(off) 1@-941+942(off) 2@-941+942(off) 6@-941+942(off) 4@12+1896
+#024 click 2                    focus=None fidx=1 show=Y chg=4 [2, 3, 6, 4] shift=-3220 | 1@-941+942(off) 2@12+942 3@966+1261 6@1919+942(off) 4@1919+1896(off)
+#025 remove 1                   focus=None fidx=0 show=Y chg=0 shift=-966 | 2@12+942 3@966+1261 6@1919+942(off) 4@1919+1896(off)
+#026 add 7 Preview              focus=7 fidx=1 show=Y chg=2 [7, 3] shift=0 | 2@12+942 7@966+942 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#027 cmd focus_left             focus=2 fidx=0 show=Y chg=0 shift=0 | 2@12+942 7@966+942 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#028 cmd cycle_width_back       focus=None fidx=0 show=Y chg=3 [2, 7, 3] shift=0 | 2@12+623 7@647+942 3@1601+1261 6@1919+942(off) 4@1919+1896(off)
+#029 cmd toggle_full            focus=None fidx=0 show=Y chg=3 [2, 7, 3] shift=0 | 2@12+1896 7@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#030 cmd redo                   focus=2 fidx=0 show=Y chg=0 shift=0 | 2@12+1896 7@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#031 cmd cycle_width            focus=None fidx=0 show=Y chg=3 [2, 7, 3] shift=0 | 2@12+623 7@647+942 3@1601+1261 6@1919+942(off) 4@1919+1896(off)
+#032 cmd undo                   focus=2 fidx=0 show=Y chg=3 [2, 7, 3] shift=0 | 2@12+1896 7@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#033 cmd redo                   focus=2 fidx=0 show=Y chg=3 [2, 7, 3] shift=0 | 2@12+623 7@647+942 3@1601+1261 6@1919+942(off) 4@1919+1896(off)
+#034 cmd toggle_full            focus=None fidx=0 show=Y chg=3 [2, 7, 3] shift=0 | 2@12+1896 7@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#035 cmd cycle_width_back       focus=None fidx=0 show=Y chg=3 [2, 7, 3] shift=0 | 2@12+1261 7@1285+942 3@1919+1260(off) 6@1919+942(off) 4@1919+1896(off)
+#036 cmd focus_right            focus=7 fidx=1 show=Y chg=3 [2, 7, 3] shift=322 | 2@-307+1261 7@966+942 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#037 cmd focus_index(2)         focus=None fidx=1 show=Y chg=0 shift=0 | 2@-307+1261 7@966+942 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#038 cmd cycle_width            focus=None fidx=1 show=Y chg=2 [2, 7] shift=322 | 2@-625+1260 7@647+1261 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#039 add 8 Notes                focus=8 fidx=2 show=Y chg=3 [2, 7, 8] shift=966 | 2@-1259+1260(off) 7@-307+1261 8@966+942 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#040 remove 7                   focus=None fidx=1 show=Y chg=3 [2, 8, 3] shift=-323 | 2@-1260+1261(off) 8@12+942 3@966+1261 6@1919+942(off) 4@1919+1896(off)
+#041 cmd toggle_full            focus=None fidx=1 show=Y chg=2 [8, 3] shift=0 | 2@-1260+1261(off) 8@12+1896 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#042 cmd toggle_full            focus=None fidx=1 show=Y chg=2 [8, 3] shift=0 | 2@-1260+1261(off) 8@12+942 3@966+1261 6@1919+942(off) 4@1919+1896(off)
+#043 click 8                    focus=None fidx=1 show=n chg=0 shift=0 | 2@-1260+1261(off) 8@12+942 3@966+1261 6@1919+942(off) 4@1919+1896(off)
+#044 click 5                    focus=None fidx=None show=Y chg=0 shift=0 | 2@-1260+1261(off) 8@12+942 3@966+1261 6@1919+942(off) 4@1919+1896(off)
+#045 cmd undo                   focus=8 fidx=1 show=Y chg=2 [8, 3] shift=0 | 2@-1260+1261(off) 8@12+1896 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#046 click 5834                 focus=None fidx=1 show=n chg=0 shift=0 | 2@-1260+1261(off) 8@12+1896 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#047 cmd undo                   focus=8 fidx=1 show=Y chg=2 [8, 3] shift=0 | 2@-1260+1261(off) 8@12+942 3@966+1261 6@1919+942(off) 4@1919+1896(off)
+#048 resize 4 w=1463            focus=None fidx=1 show=n chg=1 [4] shift=0 | 2@-1260+1261(off) 8@12+942 3@966+1261 6@1919+942(off) 4@1919+1463(off)
+#049 cmd undo                   focus=2 fidx=0 show=Y chg=4 [2, 8, 3, 4] shift=-1288 | 2@12+1261 8@1285+942 3@1919+1260(off) 6@1919+942(off) 4@1919+1896(off)
+#050 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1261 8@1285+942 3@1919+1260(off) 6@1919+942(off) 4@1919+1896(off)
+#051 cmd unstack                focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1261 8@1285+942 3@1919+1260(off) 6@1919+942(off) 4@1919+1896(off)
+#052 cmd toggle_full            focus=None fidx=0 show=Y chg=3 [2, 8, 3] shift=0 | 2@12+1896 8@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#053 click 5                    focus=None fidx=None show=Y chg=0 shift=0 | 2@12+1896 8@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#054 cmd focus_right            focus=2 fidx=0 show=Y chg=0 shift=0 | 2@12+1896 8@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#055 cmd toggle_full            focus=None fidx=0 show=Y chg=3 [2, 8, 3] shift=0 | 2@12+1261 8@1285+942 3@1919+1260(off) 6@1919+942(off) 4@1919+1896(off)
+#056 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1261 8@1285+942 3@1919+1260(off) 6@1919+942(off) 4@1919+1896(off)
+#057 cmd cycle_width            focus=None fidx=0 show=Y chg=3 [2, 8, 3] shift=0 | 2@12+1896 8@1919+942(off) 3@1919+1261(off) 6@1919+942(off) 4@1919+1896(off)
+#058 cmd focus_index(3)         focus=3 fidx=2 show=Y chg=3 [2, 8, 3] shift=2255 | 2@-1895+1896(off) 8@-307+942 3@647+1261 6@1919+942(off) 4@1919+1896(off)
+#059 remove 3                   focus=8 fidx=1 show=Y chg=2 [8, 6] shift=-323 | 2@-1895+1896(off) 8@12+942 6@966+942 4@1919+1896(off)
+#060 cmd stack                  focus=None fidx=0 show=Y chg=3 [2, 8, 6] shift=-1931 | 2@12+1896 8@12+1896 6@1919+942(off) 4@1919+1896(off)
+#061 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1896 8@12+1896 6@1919+942(off) 4@1919+1896(off)
+#062 cmd redo                   focus=8 fidx=0 show=Y chg=0 shift=0 | 2@12+1896 8@12+1896 6@1919+942(off) 4@1919+1896(off)
+#063 cmd cycle_width_back       focus=None fidx=0 show=Y chg=3 [2, 8, 6] shift=0 | 2@12+1261 8@12+1261 6@1285+942 4@1919+1896(off)
+#064 add 9 Safari               focus=9 fidx=1 show=Y chg=4 [2, 8, 9, 6] shift=322 | 2@-307+1261 8@-307+1261 9@966+942 6@1919+942(off) 4@1919+1896(off)
+#065 cmd undo                   focus=8 fidx=0 show=Y chg=3 [2, 8, 9] shift=-322 | 2@12+1896 8@12+1896 9@1919+942(off) 6@1919+942(off) 4@1919+1896(off)
+#066 cmd cycle_width_back       focus=None fidx=0 show=Y chg=3 [2, 8, 9] shift=0 | 2@12+1261 8@12+1261 9@1285+942 6@1919+942(off) 4@1919+1896(off)
+#067 remove 4                   focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1261 8@12+1261 9@1285+942 6@1919+942(off)
+#068 remove 6                   focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1261 8@12+1261 9@1285+942
+#069 cmd focus_right            focus=9 fidx=1 show=Y chg=3 [2, 8, 9] shift=322 | 2@-307+1261 8@-307+1261 9@966+942
+#070 cmd focus_left             focus=2 fidx=0 show=Y chg=3 [2, 8, 9] shift=-322 | 2@12+1261 8@12+1261 9@1285+942
+#071 click 8                    focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1261 8@12+1261 9@1285+942
+#072 cmd toggle_float           focus=None fidx=None show=Y chg=1 [2] shift=0 | 2@12+1261 9@1285+942
+#073 cmd cycle_width            focus=None fidx=None show=Y chg=0 shift=0 | 2@12+1261 9@1285+942
+#074 cmd toggle_full            focus=None fidx=None show=Y chg=0 shift=0 | 2@12+1261 9@1285+942
+#075 cmd focus_index(2)         focus=9 fidx=1 show=Y chg=2 [2, 9] shift=322 | 2@-307+1261 9@966+942
+#076 cmd undo                   focus=8 fidx=0 show=Y chg=3 [2, 8, 9] shift=-322 | 2@12+1261 8@12+1261 9@1285+942
+#077 cmd focus_right            focus=9 fidx=1 show=Y chg=3 [2, 8, 9] shift=322 | 2@-307+1261 8@-307+1261 9@966+942
+#078 cmd toggle_full            focus=None fidx=1 show=Y chg=3 [2, 8, 9] shift=965 | 2@-1260+1261(off) 8@-1260+1261(off) 9@12+1896
+#079 remove 9                   focus=2 fidx=0 show=Y chg=2 [2, 8] shift=-1288 | 2@12+1261 8@12+1261
+#080 add 10 Zotero              focus=10 fidx=1 show=Y chg=3 [2, 8, 10] shift=322 | 2@-307+1261 8@-307+1261 10@966+942
+#081 cmd toggle_full            focus=None fidx=1 show=Y chg=3 [2, 8, 10] shift=965 | 2@-1260+1261(off) 8@-1260+1261(off) 10@12+1896
+#082 cmd focus_index(3)         focus=None fidx=1 show=Y chg=0 shift=0 | 2@-1260+1261(off) 8@-1260+1261(off) 10@12+1896
+#083 cmd focus_left             focus=2 fidx=0 show=Y chg=3 [2, 8, 10] shift=-1288 | 2@12+1261 8@12+1261 10@1285+1896
+#084 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 2@12+1261 8@12+1261 10@1285+1896
+#085 cmd toggle_full            focus=None fidx=0 show=Y chg=3 [2, 8, 10] shift=0 | 2@12+1896 8@12+1896 10@1919+1896(off)
+#086 cmd focus_right            focus=10 fidx=1 show=Y chg=3 [2, 8, 10] shift=1932 | 2@-1895+1896(off) 8@-1895+1896(off) 10@12+1896
+#087 cmd toggle_full            focus=None fidx=1 show=Y chg=3 [2, 8, 10] shift=-966 | 2@-942+1896 8@-942+1896 10@966+942
+#088 cmd focus_index(3)         focus=None fidx=1 show=Y chg=0 shift=0 | 2@-942+1896 8@-942+1896 10@966+942
+#089 cmd focus_left             focus=2 fidx=0 show=Y chg=3 [2, 8, 10] shift=-965 | 2@12+1896 8@12+1896 10@1919+942(off)
+#090 cmd focus_index(3)         focus=10 fidx=1 show=Y chg=3 [2, 8, 10] shift=965 | 2@-942+1896 8@-942+1896 10@966+942
+#091 cmd toggle_full            focus=None fidx=1 show=Y chg=3 [2, 8, 10] shift=966 | 2@-1895+1896(off) 8@-1895+1896(off) 10@12+1896
+#092 cmd focus_right            focus=None fidx=1 show=Y chg=0 shift=0 | 2@-1895+1896(off) 8@-1895+1896(off) 10@12+1896
+#093 cmd toggle_full            focus=None fidx=1 show=Y chg=3 [2, 8, 10] shift=-966 | 2@-942+1896 8@-942+1896 10@966+942
+#094 cmd toggle_full            focus=None fidx=1 show=Y chg=3 [2, 8, 10] shift=966 | 2@-1895+1896(off) 8@-1895+1896(off) 10@12+1896
+#095 add 11 Zotero              focus=11 fidx=2 show=Y chg=2 [10, 11] shift=965 | 2@-1895+1896(off) 8@-1895+1896(off) 10@-942+1896 11@966+942
+#096 cmd cycle_width            focus=None fidx=2 show=Y chg=2 [10, 11] shift=322 | 2@-1895+1896(off) 8@-1895+1896(off) 10@-1261+1896 11@647+1261
+#097 cmd toggle_full            focus=None fidx=2 show=Y chg=2 [10, 11] shift=644 | 2@-1895+1896(off) 8@-1895+1896(off) 10@-1895+1896(off) 11@12+1896
+#098 cmd focus_index(1)         focus=2 fidx=0 show=Y chg=4 [2, 8, 10, 11] shift=-3864 | 2@12+1896 8@12+1896 10@1919+1896(off) 11@1919+1896(off)
+#099 add 12 Zotero              focus=12 fidx=1 show=Y chg=3 [2, 8, 12] shift=966 | 2@-942+1896 8@-942+1896 12@966+942 10@1919+1896(off) 11@1919+1896(off)
+#100 click 10                   focus=None fidx=2 show=Y chg=4 [2, 8, 12, 10] shift=1931 | 2@-1895+1896(off) 8@-1895+1896(off) 12@-941+942(off) 10@12+1896 11@1919+1896(off)
+#101 cmd toggle_float           focus=None fidx=None show=Y chg=2 [12, 11] shift=-965 | 2@-1895+1896(off) 8@-1895+1896(off) 12@12+942 11@966+1896
+#102 cmd focus_left             focus=12 fidx=1 show=Y chg=0 shift=0 | 2@-1895+1896(off) 8@-1895+1896(off) 12@12+942 11@966+1896
+#103 cmd stack                  focus=None fidx=0 show=Y chg=4 [2, 8, 12, 11] shift=-1932 | 2@12+1896 8@12+1896 12@12+1896 11@1919+1896(off)
+#104 click 10                   focus=None fidx=None show=Y chg=0 shift=0 | 2@12+1896 8@12+1896 12@12+1896 11@1919+1896(off)
+#105 cmd focus_left             focus=12 fidx=0 show=Y chg=0 shift=0 | 2@12+1896 8@12+1896 12@12+1896 11@1919+1896(off)
+#106 add 13 Safari              focus=13 fidx=1 show=Y chg=4 [2, 8, 12, 13] shift=966 | 2@-942+1896 8@-942+1896 12@-942+1896 13@966+942 11@1919+1896(off)
+#107 cmd redo                   focus=13 fidx=1 show=Y chg=0 shift=0 | 2@-942+1896 8@-942+1896 12@-942+1896 13@966+942 11@1919+1896(off)
+#108 click 13                   focus=None fidx=1 show=n chg=0 shift=0 | 2@-942+1896 8@-942+1896 12@-942+1896 13@966+942 11@1919+1896(off)
+#109 click 10                   focus=None fidx=None show=Y chg=0 shift=0 | 2@-942+1896 8@-942+1896 12@-942+1896 13@966+942 11@1919+1896(off)
+#110 cmd focus_right            focus=13 fidx=1 show=Y chg=0 shift=0 | 2@-942+1896 8@-942+1896 12@-942+1896 13@966+942 11@1919+1896(off)
+#111 click 10                   focus=None fidx=None show=Y chg=0 shift=0 | 2@-942+1896 8@-942+1896 12@-942+1896 13@966+942 11@1919+1896(off)
+#112 cmd toggle_float           focus=None fidx=2 show=Y chg=5 [2, 8, 12, 13, 10] shift=965 | 2@-1895+1896(off) 8@-1895+1896(off) 12@-1895+1896(off) 13@12+942 10@966+942 11@1919+1896(off)
+#113 cmd cycle_width            focus=None fidx=2 show=Y chg=2 [13, 10] shift=323 | 2@-1895+1896(off) 8@-1895+1896(off) 12@-1895+1896(off) 13@-307+942 10@647+1261 11@1919+1896(off)
+#114 cmd center                 focus=None fidx=2 show=Y chg=3 [13, 10, 11] shift=321 | 2@-1895+1896(off) 8@-1895+1896(off) 12@-1895+1896(off) 13@-624+942 10@330+1260 11@1602+1896
+#115 cmd focus_index(1)         focus=2 fidx=0 show=Y chg=6 [2, 8, 12, 13, 10, 11] shift=-2576 | 2@12+1896 8@12+1896 12@12+1896 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#116 cmd unstack                focus=None fidx=1 show=Y chg=3 [8, 12, 2] shift=1931 | 8@-1895+1896(off) 12@-1895+1896(off) 2@12+1896 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#117 cmd focus_left             focus=8 fidx=0 show=Y chg=3 [8, 12, 2] shift=-1931 | 8@12+1896 12@12+1896 2@1919+1896(off) 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#118 add 14 Zotero              focus=14 fidx=1 show=Y chg=3 [8, 12, 14] shift=966 | 8@-942+1896 12@-942+1896 14@966+942 2@1919+1896(off) 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#119 click 9506                 focus=None fidx=1 show=n chg=0 shift=0 | 8@-942+1896 12@-942+1896 14@966+942 2@1919+1896(off) 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#120 cmd focus_index(2)         focus=None fidx=1 show=Y chg=0 shift=0 | 8@-942+1896 12@-942+1896 14@966+942 2@1919+1896(off) 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#121 cmd toggle_full            focus=None fidx=1 show=Y chg=3 [8, 12, 14] shift=966 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+1896 2@1919+1896(off) 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#122 remove 2                   focus=None fidx=1 show=Y chg=0 shift=-1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+1896 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#123 cmd toggle_full            focus=None fidx=1 show=Y chg=2 [14, 13] shift=1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+942 13@966+942 10@1919+1261(off) 11@1919+1896(off)
+#124 cmd undo                   focus=14 fidx=1 show=Y chg=2 [14, 13] shift=-1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+1896 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#125 cmd unstack                focus=None fidx=1 show=Y chg=0 shift=0 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+1896 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#126 cmd undo                   focus=14 fidx=1 show=Y chg=3 [8, 12, 14] shift=-964 | 8@-942+1896 12@-942+1896 14@966+942 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#127 add 15 Pages               focus=15 fidx=2 show=Y chg=4 [8, 12, 14, 15] shift=964 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+942 15@966+942 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#128 cmd stack                  focus=None fidx=1 show=Y chg=3 [14, 15, 13] shift=1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+942 15@12+942 13@966+942 10@1919+1261(off) 11@1919+1896(off)
+#129 cmd cycle_width            focus=None fidx=1 show=Y chg=4 [14, 15, 13, 10] shift=0 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+1261 15@12+1261 13@1285+942 10@1919+1260(off) 11@1919+1896(off)
+#130 cmd toggle_full            focus=None fidx=1 show=Y chg=4 [14, 15, 13, 10] shift=-1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+1896 15@12+1896 13@1919+942(off) 10@1919+1261(off) 11@1919+1896(off)
+#131 cmd focus_right            focus=13 fidx=2 show=Y chg=3 [14, 15, 13] shift=967 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-942+1896 15@-942+1896 13@966+942 10@1919+1261(off) 11@1919+1896(off)
+#132 remove 11                  focus=None fidx=2 show=Y chg=0 shift=0 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-942+1896 15@-942+1896 13@966+942 10@1919+1261(off)
+#133 cmd toggle_full            focus=None fidx=2 show=Y chg=3 [14, 15, 13] shift=965 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-1895+1896(off) 15@-1895+1896(off) 13@12+1896 10@1919+1261(off)
+#134 cmd cycle_width_back       focus=None fidx=2 show=Y chg=2 [13, 10] shift=1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-1895+1896(off) 15@-1895+1896(off) 13@12+1261 10@1285+1260
+#135 cmd cycle_width            focus=None fidx=2 show=Y chg=2 [13, 10] shift=-1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-1895+1896(off) 15@-1895+1896(off) 13@12+1896 10@1919+1261(off)
+#136 cmd cycle_width            focus=None fidx=2 show=Y chg=2 [13, 10] shift=1 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-1895+1896(off) 15@-1895+1896(off) 13@12+623 10@647+1261
+#137 remove 10                  focus=None fidx=2 show=Y chg=3 [14, 15, 13] shift=-1289 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-623+1896 15@-623+1896 13@1285+623
+#138 cmd cycle_width            focus=None fidx=2 show=Y chg=3 [14, 15, 13] shift=322 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-942+1896 15@-942+1896 13@966+942
+#139 cmd center                 focus=None fidx=2 show=Y chg=3 [14, 15, 13] shift=1620 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-1419+1896 15@-1419+1896 13@489+942
+#140 cmd toggle_full            focus=None fidx=2 show=Y chg=3 [14, 15, 13] shift=-653 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-1895+1896(off) 15@-1895+1896(off) 13@12+1896
+#141 cmd toggle_full            focus=None fidx=2 show=Y chg=3 [14, 15, 13] shift=-966 | 8@-1895+1896(off) 12@-1895+1896(off) 14@-942+1896 15@-942+1896 13@966+942
+#142 cmd focus_left             focus=14 fidx=1 show=Y chg=3 [14, 15, 13] shift=-966 | 8@-1895+1896(off) 12@-1895+1896(off) 14@12+1896 15@12+1896 13@1919+942(off)
+#143 cmd focus_left             focus=8 fidx=0 show=Y chg=4 [8, 12, 14, 15] shift=-1932 | 8@12+1896 12@12+1896 14@1919+1896(off) 15@1919+1896(off) 13@1919+942(off)
+#144 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 8@12+1896 12@12+1896 14@1919+1896(off) 15@1919+1896(off) 13@1919+942(off)
+#145 cmd stack                  focus=None fidx=0 show=Y chg=0 shift=0 | 8@12+1896 12@12+1896 14@1919+1896(off) 15@1919+1896(off) 13@1919+942(off)
+#146 cmd cycle_width            focus=None fidx=0 show=Y chg=4 [8, 12, 14, 15] shift=0 | 8@12+623 12@12+623 14@647+1896 15@647+1896 13@1919+942(off)
+#147 click 12                   focus=None fidx=0 show=Y chg=0 shift=0 | 8@12+623 12@12+623 14@647+1896 15@647+1896 13@1919+942(off)
+#148 cmd toggle_float           focus=None fidx=None show=Y chg=1 [8] shift=0 | 8@12+623 14@647+1896 15@647+1896 13@1919+942(off)
+#149 cmd toggle_full            focus=None fidx=None show=Y chg=0 shift=0 | 8@12+623 14@647+1896 15@647+1896 13@1919+942(off)

@@ -1,0 +1,4 @@
+e_display_swap#10: JUMP +1017 px for one focus_right (column ~989 px)
+e_display_swap#89: JUMP -1524 px for one focus_left (column ~1488 px)
+e_display_swap#106: JUMP -2570 px for one focus_left (column ~2536 px)
+e_display_swap#113: JUMP -2570 px for one focus_left (column ~2536 px)

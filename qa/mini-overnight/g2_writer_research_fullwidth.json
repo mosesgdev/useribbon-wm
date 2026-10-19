@@ -1,0 +1,774 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 2001,
+  "app": "Pages",
+  "title": "Draft - chapter 4",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 2002,
+  "app": "Safari",
+  "title": "JSTOR - article 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 2003,
+  "app": "Safari",
+  "title": "JSTOR - article 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 4,
+  "pid": 2004,
+  "app": "Safari",
+  "title": "Wikipedia - Ribbon WM",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 5,
+  "pid": 2005,
+  "app": "Notes",
+  "title": "Quotes",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": true
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 1
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "window_added",
+  "id": 6,
+  "pid": 2006,
+  "app": "Pages",
+  "title": "Pages window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "window_removed",
+  "id": 1
+ },
+ {
+  "type": "window_added",
+  "id": 7,
+  "pid": 2007,
+  "app": "Preview",
+  "title": "Preview window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_added",
+  "id": 8,
+  "pid": 2008,
+  "app": "Notes",
+  "title": "Notes window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_removed",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_focused",
+  "id": 5834
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_resized",
+  "id": 4,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1463,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 3
+ },
+ {
+  "type": "window_removed",
+  "id": 3
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "window_added",
+  "id": 9,
+  "pid": 2009,
+  "app": "Safari",
+  "title": "Safari window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "window_removed",
+  "id": 4
+ },
+ {
+  "type": "window_removed",
+  "id": 6
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_removed",
+  "id": 9
+ },
+ {
+  "type": "window_added",
+  "id": 10,
+  "pid": 2010,
+  "app": "Zotero",
+  "title": "Zotero window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 3
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 3
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 3
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_added",
+  "id": 11,
+  "pid": 2011,
+  "app": "Zotero",
+  "title": "Zotero window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 1
+ },
+ {
+  "type": "window_added",
+  "id": 12,
+  "pid": 2012,
+  "app": "Zotero",
+  "title": "Zotero window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_focused",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "window_focused",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_added",
+  "id": 13,
+  "pid": 2013,
+  "app": "Safari",
+  "title": "Safari window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "window_focused",
+  "id": 13
+ },
+ {
+  "type": "window_focused",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 1
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_added",
+  "id": 14,
+  "pid": 2014,
+  "app": "Zotero",
+  "title": "Zotero window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_focused",
+  "id": 9506
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_removed",
+  "id": 2
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_added",
+  "id": 15,
+  "pid": 2015,
+  "app": "Pages",
+  "title": "Pages window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_removed",
+  "id": 11
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_removed",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "window_focused",
+  "id": 12
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ }
+]

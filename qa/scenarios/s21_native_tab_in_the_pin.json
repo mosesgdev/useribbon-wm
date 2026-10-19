@@ -1,0 +1,142 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 1001,
+  "app": "Safari",
+  "title": "Safari window 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 1002,
+  "app": "TextEdit",
+  "title": "TextEdit window 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 1003,
+  "app": "Mail",
+  "title": "Mail window 3",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "command",
+  "name": "pin"
+ },
+ {
+  "type": "window_replaced",
+  "old": 2,
+  "new": 12,
+  "pid": 1002,
+  "app": "TextEdit",
+  "title": "TextEdit tab 12"
+ },
+ {
+  "type": "window_replaced",
+  "old": 12,
+  "new": 22,
+  "pid": 1002,
+  "app": "TextEdit",
+  "title": "TextEdit tab 22"
+ },
+ {
+  "type": "window_added",
+  "id": 9,
+  "pid": 1009,
+  "app": "TextEdit",
+  "title": "TextEdit window 9",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_replaced",
+  "old": 22,
+  "new": 9,
+  "pid": 1002,
+  "app": "TextEdit",
+  "title": "TextEdit tab 9"
+ },
+ {
+  "type": "window_focused",
+  "id": 3
+ },
+ {
+  "type": "window_replaced",
+  "old": 9,
+  "new": 19,
+  "pid": 1002,
+  "app": "TextEdit",
+  "title": "TextEdit tab 19"
+ },
+ {
+  "type": "query"
+ },
+ {
+  "type": "command",
+  "name": "unpin"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "window_replaced",
+  "old": 19,
+  "new": 29,
+  "pid": 1002,
+  "app": "TextEdit",
+  "title": "TextEdit tab 29"
+ },
+ {
+  "type": "query"
+ }
+]

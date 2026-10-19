@@ -1,0 +1,5 @@
+module RibbonCoreFFI [system] {
+    header "../../../core/include/ribbon_core.h"
+    link "ribbon_core"
+    export *
+}

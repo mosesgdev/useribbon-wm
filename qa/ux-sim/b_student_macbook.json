@@ -1,0 +1,875 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 33,
+   "w": 1512,
+   "h": 949
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 2001,
+  "app": "Safari",
+  "title": "Safari window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 2002,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 2003,
+  "app": "Notes",
+  "title": "Notes window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 4,
+  "pid": 2004,
+  "app": "Messages",
+  "title": "Messages window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 5,
+  "pid": 2005,
+  "app": "Calendar",
+  "title": "Calendar window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 6,
+  "pid": 2006,
+  "app": "Spotify",
+  "title": "Spotify window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 7,
+  "pid": 2007,
+  "app": "Finder",
+  "title": "Finder window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 8,
+  "pid": 2008,
+  "app": "Preview",
+  "title": "Preview window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 9,
+  "pid": 2009,
+  "app": "Notion",
+  "title": "Notion window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 10,
+  "pid": 2010,
+  "app": "Slack",
+  "title": "Slack window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 11,
+  "pid": 2011,
+  "app": "Terminal",
+  "title": "Terminal window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 12,
+  "pid": 2012,
+  "app": "Xcode",
+  "title": "Xcode window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 3
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 9
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_focused",
+  "id": 7
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_removed",
+  "id": 7
+ },
+ {
+  "type": "window_resized",
+  "id": 8,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1206,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_added",
+  "id": 13,
+  "pid": 2013,
+  "app": "Canvas",
+  "title": "Canvas window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 4
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 12
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 3
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 504,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 14,
+  "pid": 2014,
+  "app": "Notes",
+  "title": "Notes window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 15,
+  "pid": 2015,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "window_added",
+  "id": 16,
+  "pid": 2016,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_removed",
+  "id": 16
+ },
+ {
+  "type": "window_focused",
+  "id": 4
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 6
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_focused",
+  "id": 6985
+ },
+ {
+  "type": "window_resized",
+  "id": 14,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 417,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_focused",
+  "id": 14
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 6
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_removed",
+  "id": 6
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "window_added",
+  "id": 17,
+  "pid": 2017,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_focused",
+  "id": 1
+ },
+ {
+  "type": "window_added",
+  "id": 18,
+  "pid": 2018,
+  "app": "Docs",
+  "title": "Docs window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_resized",
+  "id": 9,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 953,
+   "h": 700
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 19,
+  "pid": 2019,
+  "app": "Docs",
+  "title": "Docs window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_removed",
+  "id": 19
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 11
+ },
+ {
+  "type": "window_focused",
+  "id": 18
+ },
+ {
+  "type": "window_added",
+  "id": 20,
+  "pid": 2020,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_removed",
+  "id": 18
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 1
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_removed",
+  "id": 15
+ },
+ {
+  "type": "window_removed",
+  "id": 1
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_added",
+  "id": 21,
+  "pid": 2021,
+  "app": "Messages",
+  "title": "Messages window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 22,
+  "pid": 2022,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_added",
+  "id": 23,
+  "pid": 2023,
+  "app": "Messages",
+  "title": "Messages window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 24,
+  "pid": 2024,
+  "app": "Canvas",
+  "title": "Canvas window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_removed",
+  "id": 21
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "window_removed",
+  "id": 24
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "window_removed",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 8
+ },
+ {
+  "type": "window_added",
+  "id": 25,
+  "pid": 2025,
+  "app": "Mail",
+  "title": "Mail window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 26,
+  "pid": 2026,
+  "app": "Messages",
+  "title": "Messages window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_resized",
+  "id": 3,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 941,
+   "h": 700
+  }
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_focused",
+  "id": 26
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 8
+ },
+ {
+  "type": "window_removed",
+  "id": 25
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 27,
+  "pid": 2027,
+  "app": "Figma",
+  "title": "Figma window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "window_focused",
+  "id": 14
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 28,
+  "pid": 2028,
+  "app": "Canvas",
+  "title": "Canvas window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 14
+ },
+ {
+  "type": "window_focused",
+  "id": 9
+ },
+ {
+  "type": "window_added",
+  "id": 29,
+  "pid": 2029,
+  "app": "Canvas",
+  "title": "Canvas window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_removed",
+  "id": 27
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 8
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_focused",
+  "id": 12
+ },
+ {
+  "type": "window_added",
+  "id": 30,
+  "pid": 2030,
+  "app": "Notes",
+  "title": "Notes window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ }
+]

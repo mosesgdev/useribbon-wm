@@ -1,0 +1,2 @@
+g1_parent_school_mail_chat#81: JUMP -1931 px for one focus_left (column ~1896 px)
+g1_parent_school_mail_chat#105: JUMP +1932 px for one focus_right (column ~1896 px)

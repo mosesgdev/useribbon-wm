@@ -1,0 +1,394 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 1001,
+  "app": "Safari",
+  "title": "Docs",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 1002,
+  "app": "Slack",
+  "title": "Slack window 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 1003,
+  "app": "Mail",
+  "title": "Mail window 3",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 4,
+  "pid": 1004,
+  "app": "Figma",
+  "title": "Figma window 4",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 5,
+  "pid": 1005,
+  "app": "Terminal",
+  "title": "Terminal window 5",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 6,
+  "pid": 1006,
+  "app": "Notes",
+  "title": "Notes window 6",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 7,
+  "pid": 1007,
+  "app": "Music",
+  "title": "Music window 7",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "window_focused",
+  "id": 3
+ },
+ {
+  "type": "window_focused",
+  "id": 5
+ },
+ {
+  "type": "window_added",
+  "id": 8,
+  "pid": 1008,
+  "app": "Calendar",
+  "title": "Calendar window 8",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 9,
+  "pid": 1009,
+  "app": "Xcode",
+  "title": "Xcode window 9",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 10,
+  "pid": 1010,
+  "app": "Messages",
+  "title": "Messages window 10",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 11,
+  "pid": 1011,
+  "app": "Finder",
+  "title": "Move to\u2026",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": true
+ },
+ {
+  "type": "window_focused",
+  "id": 11
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_removed",
+  "id": 9
+ },
+ {
+  "type": "window_removed",
+  "id": 5
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "window_resized",
+  "id": 4,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 1100,
+   "h": 600
+  }
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "window_added",
+  "id": 12,
+  "pid": 1012,
+  "app": "Preview",
+  "title": "Preview window 12",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "move_left"
+ },
+ {
+  "type": "window_removed",
+  "id": 3
+ },
+ {
+  "type": "window_removed",
+  "id": 12
+ },
+ {
+  "type": "window_removed",
+  "id": 6
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1280,
+   "h": 800
+  }
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "query"
+ }
+]

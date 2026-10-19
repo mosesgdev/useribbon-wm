@@ -1,0 +1,3 @@
+d_tab_hoarder#77: JUMP +966 px for one focus_right (column ~942 px)
+d_tab_hoarder#85: JUMP +966 px for one focus_right (column ~942 px)
+d_tab_hoarder#96: JUMP +1288 px for one focus_right (column ~1261 px)

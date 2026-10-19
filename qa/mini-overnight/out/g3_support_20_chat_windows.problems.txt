@@ -1,0 +1,5 @@
+g3_support_20_chat_windows#36: JUMP -967 px for one focus_left (column ~942 px)
+g3_support_20_chat_windows#61: JUMP -966 px for one focus_left (column ~942 px)
+g3_support_20_chat_windows#67: JUMP +976 px for one focus_right (column ~942 px)
+g3_support_20_chat_windows#76: JUMP +966 px for one focus_right (column ~942 px)
+g3_support_20_chat_windows#172: JUMP +1932 px for one focus_right (column ~1896 px)

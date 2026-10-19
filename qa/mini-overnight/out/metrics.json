@@ -1,0 +1,176 @@
+{
+ "g1_parent_school_mail_chat": {
+  "events": 150,
+  "user_events": 149,
+  "commands": 101,
+  "avg_changed_user": "1.58",
+  "max_changed_user": "5",
+  "avg_changed_cmd": "1.49",
+  "max_changed_cmd": "5",
+  "avg_changed_focus_click": "1.82",
+  "max_changed_focus_click": "5",
+  "scroll_events": 68,
+  "big_scroll": 2,
+  "unneeded_scroll": 0,
+  "focus_fully_visible_pct": "100.0",
+  "focus_checked": 51,
+  "focus_too_wide_skipped": 0,
+  "noop_show_map": 53,
+  "map_inconsistent": 0,
+  "min_col_frac": 0.205,
+  "min_col_px": 379,
+  "tiny_col_plans": 50,
+  "engine_errors": 0,
+  "focus_move_frames_changed_without_scroll": 0,
+  "tiny_triggers": [
+   [
+    83,
+    "command",
+    "toggle_float"
+   ],
+   [
+    84,
+    "command",
+    "stack"
+   ],
+   [
+    85,
+    "command",
+    "move_right"
+   ],
+   [
+    86,
+    "command",
+    "unstack"
+   ],
+   [
+    87,
+    "command",
+    "focus_left"
+   ],
+   [
+    88,
+    "command",
+    "focus_up"
+   ],
+   [
+    89,
+    "command",
+    "unstack"
+   ],
+   [
+    90,
+    "command",
+    "focus_left"
+   ],
+   [
+    94,
+    "window_focused",
+    ""
+   ],
+   [
+    98,
+    "command",
+    "stack"
+   ],
+   [
+    109,
+    "command",
+    "stack"
+   ],
+   [
+    110,
+    "command",
+    "move_left"
+   ],
+   [
+    111,
+    "window_focused",
+    ""
+   ],
+   [
+    112,
+    "command",
+    "cycle_width"
+   ],
+   [
+    115,
+    "command",
+    "cycle_width"
+   ],
+   [
+    116,
+    "command",
+    "focus_left"
+   ],
+   [
+    117,
+    "window_removed",
+    ""
+   ],
+   [
+    118,
+    "window_focused",
+    ""
+   ],
+   [
+    119,
+    "command",
+    "move_right"
+   ]
+  ],
+  "invariant_problems": 2
+ },
+ "g2_writer_research_fullwidth": {
+  "events": 150,
+  "user_events": 149,
+  "commands": 111,
+  "avg_changed_user": "1.93",
+  "max_changed_user": "6",
+  "avg_changed_cmd": "2.06",
+  "max_changed_cmd": "6",
+  "avg_changed_focus_click": "0.62",
+  "max_changed_focus_click": "4",
+  "scroll_events": 77,
+  "big_scroll": 4,
+  "unneeded_scroll": 0,
+  "focus_fully_visible_pct": "100.0",
+  "focus_checked": 56,
+  "focus_too_wide_skipped": 0,
+  "noop_show_map": 37,
+  "map_inconsistent": 0,
+  "min_col_frac": 0.333,
+  "min_col_px": 623,
+  "tiny_col_plans": 0,
+  "engine_errors": 0,
+  "focus_move_frames_changed_without_scroll": 0,
+  "tiny_triggers": [],
+  "invariant_problems": 4
+ },
+ "g3_support_20_chat_windows": {
+  "events": 200,
+  "user_events": 199,
+  "commands": 74,
+  "avg_changed_user": "3.35",
+  "max_changed_user": "20",
+  "avg_changed_cmd": "3.41",
+  "max_changed_cmd": "20",
+  "avg_changed_focus_click": "7.70",
+  "max_changed_focus_click": "18",
+  "scroll_events": 154,
+  "big_scroll": 5,
+  "unneeded_scroll": 0,
+  "focus_fully_visible_pct": "100.0",
+  "focus_checked": 116,
+  "focus_too_wide_skipped": 0,
+  "noop_show_map": 29,
+  "map_inconsistent": 0,
+  "min_col_frac": 0.333,
+  "min_col_px": 623,
+  "tiny_col_plans": 0,
+  "engine_errors": 0,
+  "focus_move_frames_changed_without_scroll": 0,
+  "tiny_triggers": [],
+  "invariant_problems": 5
+ }
+}

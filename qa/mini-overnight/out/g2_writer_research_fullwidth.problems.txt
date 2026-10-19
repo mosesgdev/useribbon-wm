@@ -1,0 +1,4 @@
+g2_writer_research_fullwidth#18: JUMP +966 px for one focus_right (column ~942 px)
+g2_writer_research_fullwidth#86: JUMP +1932 px for one focus_right (column ~1896 px)
+g2_writer_research_fullwidth#117: JUMP -1931 px for one focus_left (column ~1896 px)
+g2_writer_research_fullwidth#143: JUMP -1932 px for one focus_left (column ~1896 px)

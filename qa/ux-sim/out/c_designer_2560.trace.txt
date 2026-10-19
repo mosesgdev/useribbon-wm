@@ -1,0 +1,118 @@
+#000 display 0,25 2560x1415     focus=None fidx=None show=Y chg=0 shift=0 | 
+#001 add 1 Figma                focus=1 fidx=0 show=Y chg=1 [1] shift=0 | 1@12+1262
+#002 cmd toggle_full            focus=None fidx=0 show=Y chg=1 [1] shift=0 | 1@12+2536
+#003 cmd toggle_full            focus=None fidx=0 show=Y chg=1 [1] shift=0 | 1@12+1262
+#004 cmd toggle_full            focus=None fidx=0 show=Y chg=1 [1] shift=0 | 1@12+2536
+#005 add 2 Color Picker FLOAT   focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536
+#006 click 2                    focus=None fidx=None show=Y chg=0 shift=0 | 1@12+2536
+#007 cmd focus_left             focus=1 fidx=0 show=Y chg=0 shift=0 | 1@12+2536
+#008 cmd focus_right            focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536
+#009 cmd focus_right            focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536
+#010 cmd center                 focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536
+#011 click 2                    focus=None fidx=None show=Y chg=0 shift=0 | 1@12+2536
+#012 cmd toggle_full            focus=None fidx=None show=Y chg=0 shift=0 | 1@12+2536
+#013 add 3 Figma                focus=3 fidx=1 show=Y chg=2 [1, 3] shift=1286 | 1@-1262+2536 3@1286+1262
+#014 cmd toggle_full            focus=None fidx=1 show=Y chg=2 [1, 3] shift=1286 | 1@-2535+2536(off) 3@12+2536
+#015 cmd focus_left             focus=1 fidx=0 show=Y chg=2 [1, 3] shift=-2572 | 1@12+2536 3@2559+2536(off)
+#016 add 4 Color Picker FLOAT   focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536 3@2559+2536(off)
+#017 click 4                    focus=None fidx=None show=Y chg=0 shift=0 | 1@12+2536 3@2559+2536(off)
+#018 cmd focus_right            focus=1 fidx=0 show=Y chg=0 shift=0 | 1@12+2536 3@2559+2536(off)
+#019 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536 3@2559+2536(off)
+#020 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536 3@2559+2536(off)
+#021 remove 4                   focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+2536 3@2559+2536(off)
+#022 cmd toggle_full            focus=None fidx=0 show=Y chg=2 [1, 3] shift=0 | 1@12+1262 3@1286+2536
+#023 cmd center                 focus=None fidx=0 show=Y chg=2 [1, 3] shift=0 | 1@649+1262 3@1923+2536
+#024 add 5 Notes                focus=5 fidx=1 show=Y chg=3 [1, 5, 3] shift=0 | 1@12+1262 5@1286+1262 3@2559+2536(off)
+#025 cmd cycle_width            focus=None fidx=1 show=Y chg=2 [1, 5] shift=429 | 1@-414+1262 5@860+1688 3@2559+2536(off)
+#026 cmd cycle_width            focus=None fidx=1 show=Y chg=2 [1, 5] shift=857 | 1@-1261+1262(off) 5@12+2536 3@2559+2536(off)
+#027 cmd focus_index(1)         focus=1 fidx=0 show=Y chg=2 [1, 5] shift=-1286 | 1@12+1262 5@1286+2536 3@2559+2536(off)
+#028 cmd toggle_full            focus=None fidx=0 show=Y chg=2 [1, 5] shift=0 | 1@12+2536 5@2559+2536(off) 3@2559+2536(off)
+#029 cmd toggle_full            focus=None fidx=0 show=Y chg=2 [1, 5] shift=0 | 1@12+1262 5@1286+2536 3@2559+2536(off)
+#030 resize 1 w=676             focus=None fidx=0 show=n chg=2 [1, 5] shift=0 | 1@12+676 5@700+2536 3@2559+2536(off)
+#031 cmd focus_index(3)         focus=3 fidx=2 show=Y chg=3 [1, 5, 3] shift=3266 | 5@-2535+2536(off) 1@-675+676(off) 3@12+2536
+#032 cmd focus_left             focus=5 fidx=1 show=Y chg=2 [5, 3] shift=-2571 | 1@-675+676(off) 5@12+2536 3@2559+2536(off)
+#033 click 2                    focus=None fidx=None show=Y chg=0 shift=0 | 1@-675+676(off) 5@12+2536 3@2559+2536(off)
+#034 cmd focus_left             focus=5 fidx=1 show=Y chg=0 shift=0 | 1@-675+676(off) 5@12+2536 3@2559+2536(off)
+#035 cmd center                 focus=None fidx=1 show=Y chg=0 shift=0 | 1@-675+676(off) 5@12+2536 3@2559+2536(off)
+#036 add 6 Color Picker         focus=6 fidx=2 show=Y chg=2 [5, 6] shift=1286 | 5@-1262+2536 1@-675+676(off) 6@1286+1262 3@2559+2536(off)
+#037 cmd focus_left             focus=5 fidx=1 show=Y chg=2 [5, 6] shift=-1286 | 1@-675+676(off) 5@12+2536 6@2559+1262(off) 3@2559+2536(off)
+#038 click 1                    focus=None fidx=0 show=Y chg=2 [1, 5] shift=-694 | 1@12+676 5@700+2536 6@2559+1262(off) 3@2559+2536(off)
+#039 add 7 Color Picker         focus=7 fidx=1 show=Y chg=2 [7, 5] shift=0 | 1@12+676 7@700+1262 5@1974+2536 6@2559+1262(off) 3@2559+2536(off)
+#040 remove 3                   focus=None fidx=1 show=Y chg=0 shift=0 | 1@12+676 7@700+1262 5@1974+2536 6@2559+1262(off)
+#041 click 1                    focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+676 7@700+1262 5@1974+2536 6@2559+1262(off)
+#042 click 7                    focus=None fidx=1 show=Y chg=0 shift=0 | 1@12+676 7@700+1262 5@1974+2536 6@2559+1262(off)
+#043 cmd toggle_float           focus=None fidx=None show=Y chg=1 [5] shift=0 | 1@12+676 5@700+2536 6@2559+1262(off)
+#044 cmd focus_right            focus=1 fidx=0 show=Y chg=0 shift=0 | 1@12+676 5@700+2536 6@2559+1262(off)
+#045 cmd stack                  focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+676 5@700+2536 6@2559+1262(off)
+#046 cmd focus_left             focus=None fidx=0 show=Y chg=0 shift=0 | 1@12+676 5@700+2536 6@2559+1262(off)
+#047 cmd focus_right            focus=5 fidx=1 show=Y chg=2 [1, 5] shift=694 | 1@-675+676(off) 5@12+2536 6@2559+1262(off)
+#048 cmd focus_left             focus=1 fidx=0 show=Y chg=2 [1, 5] shift=-694 | 1@12+676 5@700+2536 6@2559+1262(off)
+#049 add 8 Color Picker         focus=8 fidx=1 show=Y chg=2 [8, 5] shift=0 | 1@12+676 8@700+1262 5@1974+2536 6@2559+1262(off)
+#050 remove 8                   focus=1 fidx=0 show=Y chg=1 [5] shift=0 | 1@12+676 5@700+2536 6@2559+1262(off)
+#051 add 9 Figma                focus=9 fidx=1 show=Y chg=2 [9, 5] shift=0 | 1@12+676 9@700+1262 5@1974+2536 6@2559+1262(off)
+#052 click 5                    focus=None fidx=2 show=Y chg=3 [1, 9, 5] shift=1980 | 9@-1261+1262(off) 1@-675+676(off) 5@12+2536 6@2559+1262(off)
+#053 cmd focus_index(1)         focus=1 fidx=0 show=Y chg=3 [1, 9, 5] shift=-1980 | 1@12+676 9@700+1262 5@1974+2536 6@2559+1262(off)
+#054 cmd undo                   focus=7 fidx=2 show=Y chg=4 [1, 9, 7, 5] shift=694 | 1@-675+676(off) 9@12+1262 7@1286+1262 5@2559+2536(off) 6@2559+1262(off)
+#055 cmd undo                   focus=1 fidx=0 show=Y chg=3 [1, 9, 7] shift=-694 | 1@12+2536 9@2559+1262(off) 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#056 cmd cycle_width            focus=None fidx=0 show=Y chg=3 [1, 9, 7] shift=0 | 1@12+836 9@860+1262 7@2134+1262 5@2559+2536(off) 6@2559+1262(off)
+#057 click 2                    focus=None fidx=None show=Y chg=0 shift=0 | 1@12+836 9@860+1262 7@2134+1262 5@2559+2536(off) 6@2559+1262(off)
+#058 cmd toggle_float           focus=None fidx=1 show=Y chg=3 [2, 9, 7] shift=0 | 1@12+836 2@860+1262 9@2134+1262 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#059 add 10 Browser             focus=10 fidx=2 show=Y chg=4 [1, 2, 10, 9] shift=856 | 1@-835+836(off) 2@12+1262 10@1286+1262 9@2559+1262(off) 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#060 cmd focus_right            focus=9 fidx=3 show=Y chg=3 [2, 10, 9] shift=1285 | 2@-1261+1262(off) 1@-835+836(off) 10@12+1262 9@1286+1262 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#061 add 11 Notes               focus=11 fidx=4 show=Y chg=3 [10, 9, 11] shift=1287 | 2@-1261+1262(off) 10@-1261+1262(off) 1@-835+836(off) 9@12+1262 11@1286+1262 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#062 cmd focus_left             focus=9 fidx=3 show=Y chg=0 shift=0 | 2@-1261+1262(off) 10@-1261+1262(off) 1@-835+836(off) 9@12+1262 11@1286+1262 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#063 cmd focus_index(2)         focus=2 fidx=1 show=Y chg=4 [2, 10, 9, 11] shift=-2573 | 1@-835+836(off) 2@12+1262 10@1286+1262 9@2559+1262(off) 11@2559+1262(off) 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#064 cmd undo                   focus=2 fidx=None show=Y chg=3 [1, 10, 9] shift=-855 | 1@12+836 10@860+1262 9@2134+1262 11@2559+1262(off) 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#065 cmd undo                   focus=1 fidx=0 show=Y chg=3 [1, 10, 9] shift=0 | 1@12+2536 10@2559+1262(off) 9@2559+1262(off) 11@2559+1262(off) 7@2559+1262(off) 5@2559+2536(off) 6@2559+1262(off)
+#066 cmd focus_index(6)         focus=5 fidx=5 show=Y chg=6 [1, 10, 9, 11, 7, 5] shift=7717 | 1@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 5@12+2536 6@2559+1262(off)
+#067 click 2                    focus=None fidx=None show=Y chg=0 shift=0 | 1@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 5@12+2536 6@2559+1262(off)
+#068 cmd toggle_float           focus=None fidx=6 show=Y chg=2 [5, 2] shift=1287 | 1@-2535+2536(off) 5@-1262+2536 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 2@1286+1262 6@2559+1262(off)
+#069 cmd toggle_full            focus=None fidx=6 show=Y chg=2 [5, 2] shift=1284 | 1@-2535+2536(off) 5@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 2@12+2536 6@2559+1262(off)
+#070 cmd stack                  focus=None fidx=5 show=Y chg=2 [5, 2] shift=-2572 | 1@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 5@12+2536 2@12+2536 6@2559+1262(off)
+#071 cmd focus_right            focus=6 fidx=6 show=Y chg=3 [5, 2, 6] shift=1285 | 1@-2535+2536(off) 5@-1262+2536 2@-1262+2536 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 6@1286+1262
+#072 cmd focus_right            focus=None fidx=6 show=Y chg=0 shift=0 | 1@-2535+2536(off) 5@-1262+2536 2@-1262+2536 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 6@1286+1262
+#073 add 12 Figma               focus=12 fidx=7 show=Y chg=4 [5, 2, 6, 12] shift=1288 | 1@-2535+2536(off) 5@-2535+2536(off) 2@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 6@12+1262 12@1286+1262
+#074 cmd stack                  focus=None fidx=6 show=Y chg=4 [5, 2, 6, 12] shift=-1288 | 1@-2535+2536(off) 5@-1262+2536 2@-1262+2536 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 6@1286+1262 12@1286+1262
+#075 resize 5 w=2065            focus=None fidx=6 show=n chg=2 [5, 2] shift=-475 | 1@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 5@-791+2065 2@-791+2065 6@1286+1262 12@1286+1262
+#076 cmd toggle_full            focus=None fidx=6 show=Y chg=4 [5, 2, 6, 12] shift=1286 | 1@-2535+2536(off) 5@-2064+2065(off) 2@-2064+2065(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 6@12+2536 12@12+2536
+#077 cmd focus_right            focus=None fidx=6 show=Y chg=0 shift=0 | 1@-2535+2536(off) 5@-2064+2065(off) 2@-2064+2065(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 6@12+2536 12@12+2536
+#078 cmd focus_left             focus=2 fidx=5 show=Y chg=4 [5, 2, 6, 12] shift=-2097 | 1@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@-1261+1262(off) 5@12+2065 2@12+2065 6@2089+2536 12@2089+2536
+#079 cmd focus_left             focus=7 fidx=4 show=Y chg=5 [7, 5, 2, 6, 12] shift=-1285 | 1@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@12+1262 5@1286+2065 2@1286+2065 6@2559+2536(off) 12@2559+2536(off)
+#080 remove 1                   focus=None fidx=3 show=Y chg=0 shift=-2571 | 10@-1261+1262(off) 9@-1261+1262(off) 11@-1261+1262(off) 7@12+1262 5@1286+2065 2@1286+2065 6@2559+2536(off) 12@2559+2536(off)
+#081 cmd focus_left             focus=11 fidx=2 show=Y chg=4 [11, 7, 5, 2] shift=-1286 | 10@-1261+1262(off) 9@-1261+1262(off) 11@12+1262 7@1286+1262 5@2559+2065(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#082 cmd cycle_width            focus=None fidx=2 show=Y chg=2 [11, 7] shift=0 | 10@-1261+1262(off) 9@-1261+1262(off) 11@12+1688 7@1712+1262 5@2559+2065(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#083 cmd toggle_full            focus=None fidx=2 show=Y chg=2 [11, 7] shift=0 | 10@-1261+1262(off) 9@-1261+1262(off) 11@12+2536 7@2559+1262(off) 5@2559+2065(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#084 cmd focus_left             focus=9 fidx=1 show=Y chg=2 [9, 11] shift=-1286 | 10@-1261+1262(off) 9@12+1262 11@1286+2536 7@2559+1262(off) 5@2559+2065(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#085 click 7                    focus=None fidx=3 show=Y chg=3 [9, 11, 7] shift=2572 | 11@-1262+2536 10@-1261+1262(off) 9@-1261+1262(off) 7@1286+1262 5@2559+2065(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#086 remove 5                   focus=None fidx=3 show=Y chg=1 [2] shift=0 | 11@-1262+2536 10@-1261+1262(off) 9@-1261+1262(off) 7@1286+1262 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#087 click 11                   focus=None fidx=2 show=Y chg=2 [11, 7] shift=-1286 | 10@-1261+1262(off) 9@-1261+1262(off) 11@12+2536 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#088 cmd focus_left             focus=9 fidx=1 show=Y chg=2 [9, 11] shift=-1286 | 10@-1261+1262(off) 9@12+1262 11@1286+2536 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#089 cmd focus_left             focus=10 fidx=0 show=Y chg=3 [10, 9, 11] shift=-1286 | 10@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#090 add 13 Color Picker        focus=13 fidx=1 show=Y chg=2 [13, 9] shift=0 | 10@12+1262 13@1286+1262 9@2559+1262(off) 11@2559+2536(off) 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#091 click 9                    focus=None fidx=2 show=Y chg=3 [10, 13, 9] shift=1285 | 10@-1261+1262(off) 13@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#092 cmd focus_left             focus=13 fidx=1 show=Y chg=0 shift=0 | 10@-1261+1262(off) 13@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#093 cmd center                 focus=None fidx=1 show=Y chg=3 [10, 13, 9] shift=-642 | 10@-625+1262 13@649+1262 9@1923+1262 11@2559+2536(off) 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#094 cmd focus_right            focus=9 fidx=2 show=Y chg=3 [10, 13, 9] shift=642 | 10@-1261+1262(off) 13@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#095 cmd focus_right            focus=11 fidx=3 show=Y chg=3 [13, 9, 11] shift=2572 | 10@-1261+1262(off) 13@-1261+1262(off) 9@-1261+1262(off) 11@12+2536 7@2559+1262(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#096 cmd focus_right            focus=7 fidx=4 show=Y chg=2 [11, 7] shift=1286 | 11@-1262+2536 10@-1261+1262(off) 13@-1261+1262(off) 9@-1261+1262(off) 7@1286+1262 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#097 cmd center                 focus=None fidx=4 show=Y chg=3 [11, 7, 2] shift=642 | 11@-1899+2536 10@-1261+1262(off) 13@-1261+1262(off) 9@-1261+1262(off) 7@649+1262 2@1923+2065 6@2559+2536(off) 12@2559+2536(off)
+#098 add 14 Notes               focus=14 fidx=5 show=Y chg=4 [11, 7, 14, 2] shift=644 | 11@-2535+2536(off) 10@-1261+1262(off) 13@-1261+1262(off) 9@-1261+1262(off) 7@12+1262 14@1286+1262 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#099 cmd toggle_full            focus=None fidx=5 show=Y chg=2 [7, 14] shift=1284 | 11@-2535+2536(off) 10@-1261+1262(off) 13@-1261+1262(off) 9@-1261+1262(off) 7@-1261+1262(off) 14@12+2536 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#100 click 13                   focus=None fidx=1 show=Y chg=5 [13, 9, 11, 7, 14] shift=-6428 | 10@-1261+1262(off) 13@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#101 cmd toggle_float           focus=None fidx=None show=Y chg=1 [10] shift=-1287 | 10@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#102 cmd center                 focus=None fidx=None show=Y chg=0 shift=0 | 10@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#103 cmd focus_left             focus=10 fidx=0 show=Y chg=0 shift=0 | 10@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#104 cmd redo                   focus=10 fidx=0 show=Y chg=0 shift=0 | 10@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#105 cmd cycle_width            focus=None fidx=0 show=Y chg=2 [10, 9] shift=0 | 10@12+1688 9@1712+1262 11@2559+2536(off) 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#106 cmd undo                   focus=10 fidx=0 show=Y chg=2 [10, 9] shift=0 | 10@12+1262 9@1286+1262 11@2559+2536(off) 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#107 click 14                   focus=None fidx=4 show=Y chg=5 [10, 9, 11, 7, 14] shift=6431 | 11@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 7@-1261+1262(off) 14@12+2536 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#108 click 7                    focus=None fidx=3 show=Y chg=2 [7, 14] shift=-1286 | 11@-2535+2536(off) 10@-1261+1262(off) 9@-1261+1262(off) 7@12+1262 14@1286+2536 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#109 cmd focus_left             focus=11 fidx=2 show=Y chg=3 [11, 7, 14] shift=-2572 | 10@-1261+1262(off) 9@-1261+1262(off) 11@12+2536 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#110 click 9                    focus=None fidx=1 show=Y chg=2 [9, 11] shift=-1285 | 10@-1261+1262(off) 9@12+1262 11@1286+2536 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#111 cmd toggle_float           focus=None fidx=None show=Y chg=1 [10] shift=-1286 | 10@12+1262 11@1286+2536 7@2559+1262(off) 14@2559+2536(off) 2@2559+2065(off) 6@2559+2536(off) 12@2559+2536(off)
+#112 click 12                   focus=None fidx=5 show=Y chg=7 shift=9813 | 11@-2535+2536(off) 14@-2535+2536(off) 2@-2064+2065(off) 10@-1261+1262(off) 7@-1261+1262(off) 6@12+2536 12@12+2536
+#113 cmd toggle_float           focus=None fidx=None show=Y chg=1 [6] shift=0 | 11@-2535+2536(off) 14@-2535+2536(off) 2@-2064+2065(off) 10@-1261+1262(off) 7@-1261+1262(off) 6@12+2536
+#114 cmd undo                   focus=12 fidx=5 show=Y chg=2 [6, 12] shift=0 | 11@-2535+2536(off) 14@-2535+2536(off) 2@-2064+2065(off) 10@-1261+1262(off) 7@-1261+1262(off) 6@12+2536 12@12+2536
+#115 add 15 Browser             focus=15 fidx=6 show=Y chg=3 [6, 12, 15] shift=1287 | 11@-2535+2536(off) 14@-2535+2536(off) 2@-2064+2065(off) 6@-1262+2536 12@-1262+2536 10@-1261+1262(off) 7@-1261+1262(off) 15@1286+1262
+#116 cmd stack                  focus=None fidx=5 show=Y chg=3 [6, 12, 15] shift=-1287 | 11@-2535+2536(off) 14@-2535+2536(off) 2@-2064+2065(off) 10@-1261+1262(off) 7@-1261+1262(off) 6@12+2536 12@12+2536 15@12+2536
+#117 remove 10                  focus=None fidx=4 show=Y chg=0 shift=-1286 | 11@-2535+2536(off) 14@-2535+2536(off) 2@-2064+2065(off) 7@-1261+1262(off) 6@12+2536 12@12+2536 15@12+2536

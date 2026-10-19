@@ -1,0 +1,66 @@
+   Compiling libc v0.2.190
+   Compiling rand_core v0.10.1
+   Compiling getrandom v0.4.3
+   Compiling cfg-if v1.0.5
+   Compiling rustix v1.1.5
+   Compiling autocfg v1.5.1
+   Compiling bitflags v2.13.2
+   Compiling once_cell v1.21.4
+   Compiling fastrand v2.5.0
+   Compiling bit-vec v0.10.1
+   Compiling quick-error v1.2.3
+   Compiling fnv v1.0.7
+   Compiling chacha20 v0.10.2
+   Compiling bit-set v0.11.1
+   Compiling rand_xorshift v0.5.0
+   Compiling unarray v0.1.4
+   Compiling core_detect v1.0.0
+   Compiling regex-syntax v0.8.11
+   Compiling num-traits v0.2.19
+   Compiling errno v0.3.14
+   Compiling wait-timeout v0.2.1
+   Compiling rand v0.10.3
+   Compiling tempfile v3.27.0
+   Compiling rusty-fork v0.3.1
+   Compiling proptest v1.12.0
+   Compiling ribbon_core v0.1.0 (/Users/moses/Projects/ribbon/core)
+    Finished `release` profile [optimized] target(s) in 9.44s
+     Running tests/props.rs (target/release/deps/props-b01e2f5f23cee4c3)
+
+running 3 tests
+test undo_restores_previous_state ... ok
+test invariants_hold ... ok
+test deterministic ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 38.65s
+
+    Finished `release` profile [optimized] target(s) in 0.04s
+     Running tests/props.rs (target/release/deps/props-b01e2f5f23cee4c3)
+
+running 3 tests
+test undo_restores_previous_state ... ok
+test invariants_hold ... ok
+test deterministic ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 38.94s
+
+    Finished `release` profile [optimized] target(s) in 0.08s
+     Running tests/props.rs (target/release/deps/props-b01e2f5f23cee4c3)
+
+running 3 tests
+test undo_restores_previous_state ... ok
+test invariants_hold ... ok
+test deterministic ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 39.32s
+
+    Finished `release` profile [optimized] target(s) in 0.05s
+     Running tests/props.rs (target/release/deps/props-b01e2f5f23cee4c3)
+
+running 3 tests
+test undo_restores_previous_state ... ok
+test invariants_hold ... ok
+test deterministic ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 39.37s
+

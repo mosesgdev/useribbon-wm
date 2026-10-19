@@ -1,0 +1,126 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ },
+ {
+  "type": "command",
+  "name": "focus_down"
+ },
+ {
+  "type": "command",
+  "name": "move_left"
+ },
+ {
+  "type": "command",
+  "name": "move_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "stack"
+ },
+ {
+  "type": "command",
+  "name": "unstack"
+ },
+ {
+  "type": "command",
+  "name": "center"
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "redo"
+ },
+ {
+  "type": "command",
+  "name": "gather"
+ },
+ {
+  "type": "command",
+  "name": "query_nothing_here"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 1
+ },
+ {
+  "type": "command",
+  "name": "focus_window",
+  "arg": 5
+ },
+ {
+  "type": "query"
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 1001,
+  "app": "Safari",
+  "title": "Safari window 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_removed",
+  "id": 1
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "query"
+ }
+]

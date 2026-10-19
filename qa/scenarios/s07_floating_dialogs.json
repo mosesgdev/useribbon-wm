@@ -1,0 +1,137 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 1001,
+  "app": "Safari",
+  "title": "Safari window 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 1002,
+  "app": "Slack",
+  "title": "Slack window 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 1003,
+  "app": "Mail",
+  "title": "Mail window 3",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 10,
+  "pid": 1010,
+  "app": "Finder",
+  "title": "Save As",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": true
+ },
+ {
+  "type": "window_focused",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 11,
+  "pid": 1011,
+  "app": "Safari",
+  "title": "Preferences",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": true
+ },
+ {
+  "type": "window_focused",
+  "id": 11
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "window_focused",
+  "id": 10
+ },
+ {
+  "type": "window_removed",
+  "id": 10
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "toggle_float"
+ },
+ {
+  "type": "window_removed",
+  "id": 11
+ },
+ {
+  "type": "query"
+ }
+]

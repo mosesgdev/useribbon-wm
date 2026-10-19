@@ -1,0 +1,701 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 25,
+   "w": 1920,
+   "h": 1030
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 2001,
+  "app": "Chrome",
+  "title": "Chrome tab 0",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 2002,
+  "app": "Safari",
+  "title": "Safari tab 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 3,
+  "pid": 2003,
+  "app": "Docs",
+  "title": "Docs tab 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 4,
+  "pid": 2004,
+  "app": "Trello",
+  "title": "Trello tab 3",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 5,
+  "pid": 2005,
+  "app": "Gmail",
+  "title": "Gmail tab 4",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 6,
+  "pid": 2006,
+  "app": "YouTube",
+  "title": "YouTube tab 5",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 7,
+  "pid": 2007,
+  "app": "Reddit",
+  "title": "Reddit tab 6",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "window_added",
+  "id": 8,
+  "pid": 2008,
+  "app": "Twitter",
+  "title": "Twitter tab 7",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 9,
+  "pid": 2009,
+  "app": "Notion",
+  "title": "Notion tab 8",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 10,
+  "pid": 2010,
+  "app": "GitHub",
+  "title": "GitHub tab 9",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_removed",
+  "id": 1
+ },
+ {
+  "type": "window_added",
+  "id": 11,
+  "pid": 2011,
+  "app": "Figma",
+  "title": "Figma tab 10",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 12,
+  "pid": 2012,
+  "app": "Slack",
+  "title": "Slack tab 11",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 13,
+  "pid": 2013,
+  "app": "Terminal",
+  "title": "Terminal tab 12",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 14,
+  "pid": 2014,
+  "app": "News",
+  "title": "News tab 13",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "window_added",
+  "id": 15,
+  "pid": 2015,
+  "app": "Chrome",
+  "title": "Chrome tab 14",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 16,
+  "pid": 2016,
+  "app": "Safari",
+  "title": "Safari tab 15",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 17,
+  "pid": 2017,
+  "app": "Docs",
+  "title": "Docs tab 16",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 18,
+  "pid": 2018,
+  "app": "Trello",
+  "title": "Trello tab 17",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_removed",
+  "id": 8
+ },
+ {
+  "type": "window_added",
+  "id": 19,
+  "pid": 2019,
+  "app": "Gmail",
+  "title": "Gmail tab 18",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 20,
+  "pid": 2020,
+  "app": "YouTube",
+  "title": "YouTube tab 19",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 2
+ },
+ {
+  "type": "window_added",
+  "id": 21,
+  "pid": 2021,
+  "app": "Reddit",
+  "title": "Reddit tab 20",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 22,
+  "pid": 2022,
+  "app": "Twitter",
+  "title": "Twitter tab 21",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 23,
+  "pid": 2023,
+  "app": "Notion",
+  "title": "Notion tab 22",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 24,
+  "pid": 2024,
+  "app": "GitHub",
+  "title": "GitHub tab 23",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 25,
+  "pid": 2025,
+  "app": "Figma",
+  "title": "Figma tab 24",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 1
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 6
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "window_added",
+  "id": 26,
+  "pid": 2026,
+  "app": "Notion",
+  "title": "Notion window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 11
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_index",
+  "arg": 16
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 26
+ },
+ {
+  "type": "window_focused",
+  "id": 9
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "toggle_full"
+ },
+ {
+  "type": "command",
+  "name": "cycle_width_back"
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "undo"
+ },
+ {
+  "type": "window_focused",
+  "id": 22
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_added",
+  "id": 27,
+  "pid": 2027,
+  "app": "Reddit",
+  "title": "Reddit window",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "window_focused",
+  "id": 25
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ }
+]

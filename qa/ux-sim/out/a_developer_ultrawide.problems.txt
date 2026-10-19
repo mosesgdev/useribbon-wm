@@ -1,0 +1,5 @@
+a_developer_ultrawide#11: JUMP -1926 px for one focus_left (column ~1902 px)
+a_developer_ultrawide#42: JUMP +1928 px for one focus_right (column ~1902 px)
+a_developer_ultrawide#46: JUMP +2571 px for one focus_right (column ~2541 px)
+a_developer_ultrawide#76: JUMP -3851 px for one focus_left (column ~3816 px)
+a_developer_ultrawide#104: JUMP +3850 px for one focus_right (column ~3816 px)

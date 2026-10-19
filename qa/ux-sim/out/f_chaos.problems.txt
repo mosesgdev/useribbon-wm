@@ -1,0 +1,3 @@
+f_chaos#6: engine error: unknown command: bogus_command
+f_chaos#9: engine error: focus_index needs a numeric arg
+f_chaos#39: JUMP +966 px for one focus_right (column ~942 px)

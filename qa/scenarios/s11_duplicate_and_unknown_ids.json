@@ -1,0 +1,125 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 1920,
+   "h": 1050
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 1001,
+  "app": "Safari",
+  "title": "Safari window 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 1001,
+  "app": "Safari",
+  "title": "Safari window 1",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 1002,
+  "app": "Slack",
+  "title": "Slack window 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": false
+ },
+ {
+  "type": "window_removed",
+  "id": 99
+ },
+ {
+  "type": "window_removed",
+  "id": 1
+ },
+ {
+  "type": "window_removed",
+  "id": 1
+ },
+ {
+  "type": "window_focused",
+  "id": 42
+ },
+ {
+  "type": "window_resized",
+  "id": 42,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 500,
+   "h": 600
+  }
+ },
+ {
+  "type": "window_title",
+  "id": 42,
+  "title": "ghost"
+ },
+ {
+  "type": "window_focused",
+  "id": 2
+ },
+ {
+  "type": "window_title",
+  "id": 2,
+  "title": "renamed"
+ },
+ {
+  "type": "command",
+  "name": "focus_window",
+  "arg": 42
+ },
+ {
+  "type": "command",
+  "name": "focus_window"
+ },
+ {
+  "type": "command",
+  "name": "focus_window",
+  "arg": 2
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 1002,
+  "app": "Slack",
+  "title": "Slack window 2",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 800,
+   "h": 600
+  },
+  "floating": true
+ },
+ {
+  "type": "query"
+ }
+]

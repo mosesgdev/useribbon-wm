@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key><string>com.makeautomation.ribbon</string>
+    <key>CFBundleName</key><string>Ribbon</string>
+    <key>CFBundleDisplayName</key><string>Ribbon</string>
+    <key>CFBundleExecutable</key><string>Ribbon</string>
+    <key>CFBundleIconFile</key><string>Ribbon</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>0.1.0</string>
+    <key>CFBundleVersion</key><string>1</string>
+    <key>LSMinimumSystemVersion</key><string>26.0</string>
+    <key>LSUIElement</key><true/>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>NSAccessibilityUsageDescription</key>
+    <string>Ribbon needs Accessibility access to move and resize your windows into a calm, scrolling row.</string>
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>Smooth swiping slides pictures of your windows while your fingers move. They stay in memory and are never saved.</string>
+</dict>
+</plist>

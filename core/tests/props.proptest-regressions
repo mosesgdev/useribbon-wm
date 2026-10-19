@@ -1,0 +1,10 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 6444293e77cac6a1395a71a7b4548432b59b92d6034d4d75ff93a637098c3ae7 # shrinks to prefix = [WindowAdded { id: 1, pid: 1, app: "a1", title: "t", frame: Rect { x: 0.0, y: 25.0, w: 1000.0, h: 800.0 }, floating: false }], last = Command { name: "center", arg: Some(Number(0)) }
+cc cd28b8ed740bd6b9f6b1c5180350cef52963f2b876a4f2c563117f9a163356f6 # shrinks to prefix = [WindowAdded { id: 1, pid: 1, app: "a1", title: "t", frame: Rect { x: 0.0, y: 25.0, w: 1000.0, h: 800.0 }, floating: true }, Command { name: "toggle_float", arg: Some(Number(0)) }, Command { name: "center", arg: Some(Number(0)) }], last = Command { name: "gather", arg: Some(Number(0)) }
+cc 4a143391ef5b23c534614af092fda9255a4cf83fc1e48275f4af5ac175b160d8 # shrinks to prefix = [WindowAdded { id: 1, pid: 1, app: "a1", title: "t", frame: Rect { x: 0.0, y: 25.0, w: 1000.0, h: 800.0 }, floating: false, width_hint: None }, Command { name: "center", arg: Some(Number(0)) }], last = Command { name: "cycle_width", arg: Some(Number(0)) }
+cc bb4b46ee62ccd4f0ec16b7b3b5684ddb7e847bca79127059611e235278b8299c # shrinks to events = [WindowAdded { id: 6, pid: 1, app: "a6", title: "t", frame: Rect { x: 0.0, y: 25.0, w: 1000.0, h: 800.0 }, floating: false, width_hint: None }, WindowResized { id: 6, frame: Rect { x: 0.0, y: 0.0, w: 481.71201910984365, h: 20.0 } }]

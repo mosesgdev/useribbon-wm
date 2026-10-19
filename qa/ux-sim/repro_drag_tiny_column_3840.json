@@ -1,0 +1,50 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 30,
+   "w": 3840,
+   "h": 1170
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 3001,
+  "app": "Zed",
+  "title": "Zed",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_added",
+  "id": 2,
+  "pid": 3002,
+  "app": "Terminal",
+  "title": "Terminal",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "window_resized",
+  "id": 2,
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 300,
+   "h": 700
+  }
+ }
+]

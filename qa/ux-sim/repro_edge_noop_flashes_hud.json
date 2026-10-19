@@ -1,0 +1,38 @@
+[
+ {
+  "type": "display",
+  "id": 1,
+  "frame": {
+   "x": 0,
+   "y": 33,
+   "w": 1512,
+   "h": 949
+  }
+ },
+ {
+  "type": "window_added",
+  "id": 1,
+  "pid": 3001,
+  "app": "Safari",
+  "title": "Safari",
+  "frame": {
+   "x": 0,
+   "y": 0,
+   "w": 900,
+   "h": 700
+  },
+  "floating": false
+ },
+ {
+  "type": "command",
+  "name": "focus_left"
+ },
+ {
+  "type": "command",
+  "name": "focus_right"
+ },
+ {
+  "type": "command",
+  "name": "focus_up"
+ }
+]
