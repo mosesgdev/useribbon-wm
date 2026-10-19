@@ -20,6 +20,8 @@ final class FocusRing {
     private var shown = false
     private var fade = RingFade()                    // the fade-in in flight: a refresh meanwhile must not cut it to full opacity
     private var windowSize = CGSize.zero, margin = 0.0   // the framed window's size and the ring's reach beyond it, for `follow`
+    private static let glide: TimeInterval = 0.2
+    private var glideEnds: CFTimeInterval = 0            // when the glide to the ring's last frame ends
 
     /// Show (or move) the ring around `axFrame` (global top-left coordinates) for window `id`. `fadeIn`: false where something
     /// covers the ring while it is placed (the swipe overlay), so that it is there at full opacity when the cover goes.
@@ -56,11 +58,25 @@ final class FocusRing {
             shown = true
         } else {
             if p.frame != frame {
-                NSAnimationContext.runAnimationGroup { c in
-                    c.duration = move ? 0.2 : 0
-                    c.timingFunction = CAMediaTimingFunction(controlPoints: 0.2, 0.9, 0.2, 1)
-                    c.allowsImplicitAnimation = true
-                    p.animator().setFrame(frame, display: true)
+                if move {
+                    NSAnimationContext.runAnimationGroup { c in
+                        c.duration = Self.glide
+                        c.timingFunction = CAMediaTimingFunction(controlPoints: 0.2, 0.9, 0.2, 1)
+                        c.allowsImplicitAnimation = true
+                        p.animator().setFrame(frame, display: true)
+                    }
+                    glideEnds = now + Self.glide
+                } else if now < glideEnds {
+                    // A glide is still running: a zero-length animation takes it over (its next step would undo a plain setFrame).
+                    NSAnimationContext.runAnimationGroup { c in
+                        c.duration = 0
+                        p.animator().setFrame(frame, display: true)
+                    }
+                    glideEnds = 0
+                } else {
+                    // At once. A zero-length animation lands a moment later, and one per display frame (a floating window
+                    // followed while it is dragged or resized) replaced the last before it landed: the ring stood still.
+                    p.setFrame(frame, display: true)
                 }
             }
             if switched { fade.noteSwitch(at: now) }           // the ring only moved to the next window: still part of a burst

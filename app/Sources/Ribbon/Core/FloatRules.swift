@@ -89,4 +89,47 @@ enum Floating {
         let w = min(visible.width * 0.5, 1200), h = min(visible.height * 0.7, 900)
         return CGRect(x: (visible.midX - w / 2).rounded(), y: (visible.midY - h / 2).rounded(), width: w.rounded(), height: h.rounded())
     }
+
+    /// How far outside its frame a window can still be grabbed: macOS's resize zone reaches past the edge.
+    static let grabMargin: CGFloat = 6
+
+    /// The floating window a press at `p` may move or resize: the frontmost window under the pointer (within its resize zone),
+    /// when Ribbon floats it. A press on any other window, even one above a floating window's edge, follows nothing.
+    /// `windows`: the window server's list, front to back (Ribbon's own panels left out). Normal windows (layer 0) and the
+    /// windows Ribbon manages take a press: a managed window may be kept on top (layer 3), while the Dock, the menu bar and
+    /// overlays above every window never do.
+    static func pressed(at p: CGPoint, windows: [(id: UInt32, layer: Int, frame: CGRect)], managed: (UInt32) -> Bool,
+                        floating: (UInt32) -> Bool) -> UInt32? {
+        guard let top = windows.first(where: { ($0.layer == 0 || managed($0.id)) && $0.frame.insetBy(dx: -grabMargin, dy: -grabMargin).contains(p) })
+        else { return nil }
+        return floating(top.id) ? top.id : nil
+    }
+}
+
+/// A floating window under the pressed mouse button, followed every display frame: macOS reports a dragged or resized window
+/// to accessibility only about ten times a second, so a ring that waited for those reports trailed the window. The frame comes
+/// from the window server, which has it the moment it is on screen.
+struct FloatFollow {
+    enum Step: Equatable {
+        case none            // nothing moved since the last frame
+        case move(CGPoint)   // the window only moved, its top-left corner is here now
+        case place(CGRect)   // the window is here now: the first frame, or its size changed
+        case end             // the button is up, or the window is gone: follow no more
+    }
+
+    private(set) var id: UInt32?
+    /// Where the window was at the last frame (nil until the first).
+    private(set) var frame: CGRect?
+
+    mutating func start(_ id: UInt32) { self.id = id; frame = nil }
+    mutating func stop() { id = nil; frame = nil }
+
+    /// One display frame: whether the button is still down, and the followed window's frame as the window server has it.
+    mutating func tick(buttonDown: Bool, frame now: CGRect?) -> Step {
+        guard id != nil else { return .none }
+        guard buttonDown, let now else { stop(); return .end }
+        if now == frame { return .none }
+        defer { frame = now }
+        return frame?.size == now.size ? .move(now.origin) : .place(now)
+    }
 }

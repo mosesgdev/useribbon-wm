@@ -360,16 +360,6 @@ def _():
     return ev
 
 
-@scenario("s21_native_tab_in_the_pin")
-def _():
-    # The same TextEdit tab group pinned to the left edge: its tab switches keep the pin (side, width, focus), also across unpin/undo.
-    ev = [display(), add(1), add(2, app="TextEdit"), add(3), focused(2), cmd("pin")]
-    ev += [replaced(2, 12), replaced(12, 22)]                             # tab clicks in the pin
-    ev += [add(9, app="TextEdit"), replaced(22, 9)]                       # a tab opened (its add came first): it joins the pin, not the ribbon
-    ev += [focused(3), replaced(9, 19), query()]                          # a switch while the ribbon has the focus
-    ev += cmds("unpin", "undo", "undo", "redo")
-    ev += [replaced(19, 29), query()]
-    return ev
 
 
 # ---- minimal repros for suspected bugs (see qa/reports/mini-validation-1.md) ----

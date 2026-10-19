@@ -166,7 +166,9 @@ It writes the committed tree of REF (default HEAD) minus the Plus edition. Into 
 but `.git` and commits the result as one commit, "Ribbon <short sha>: <subject>", so the public history is one commit per export and
 never carries the private one. It never pushes: look at the commit, then `git -C OUT push`. What it does to the tree:
 
-- deletes `core/src/plus/`, `app/Sources/Ribbon/Plus/`, `docs/ribbon-pinned-column.html`, and itself and `check-public-build.sh`;
+- deletes `core/src/plus/`, `app/Sources/Ribbon/Plus/`, `docs/ribbon-pinned-column.html`, the pin's QA scenario
+  (`qa/scenarios/s21_native_tab_in_the_pin.json`), the landing page (`site/`, which deploys from this repo), and itself and
+  `check-public-build.sh`;
 - `unifdef -URIBBON_PLUS -m` on the Free/ files that name `RIBBON_PLUS`;
 - `engine.rs` keeps only the free twin of each Plus module, and `--features plus` stops with a `compile_error!` that says the Plus
   edition is not in the repo. The `plus` feature stays declared in `core/Cargo.toml` (with a comment saying so), because the
@@ -180,8 +182,10 @@ never carries the private one. It never pushes: look at the commit, then `git -C
   | a table row ending in `<!-- plus-row -->` | the row is gone |
   | a line that is only `<!-- free: TEXT -->` | `TEXT` (what the public doc says instead) |
 
-  SPEC.md's pinned column, the ⌃⌥K row, the README's pinned-width note and core/README.md's edition notes are marked this way. A
-  Plus-only doc of its own is added to the delete list in the script.
+  SPEC.md's pinned column, every clause elsewhere in SPEC.md and core/README.md that says what happens beside a pin, the ⌃⌥K row,
+  the README's pinned-width note and core/README.md's edition notes are marked this way. A Plus-only doc of its own is added to the
+  delete list in the script;
+- in the Python QA tools, lines from a `# plus` line to a `# /plus` line go (the pin's scenario in `gen_scenarios.py`).
 
 It fails if a marker, a `RIBBON_PLUS` directive or the Plus code is left. The Makefile's test for `core/src/plus` is the only code in
 the public tree that names a deleted path, and `check-public-build.sh` allows exactly that.

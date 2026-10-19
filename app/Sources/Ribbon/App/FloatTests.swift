@@ -46,5 +46,37 @@ enum FloatTests {
         check(Floating.frame(remembered: nil, original: tile, visible: vis) == middle, "float frame: a full-height original gives a window-sized one in the middle")
         check(Floating.frame(remembered: nil, original: nil, visible: vis) == middle, "float frame: nothing known gives a window-sized one in the middle")
         check(Floating.frame(remembered: CGRect(x: 0, y: 0, width: 40, height: 40), original: nil, visible: vis) == middle, "float frame: a sliver is no frame")
+
+        // A press on a floating window: the ring follows it every display frame while the button is down (AX reports a drag only
+        // about ten times a second, and the ring trailed the window).
+        let front = CGRect(x: 100, y: 100, width: 400, height: 300), back = CGRect(x: 300, y: 200, width: 600, height: 500)
+        let list: [(id: UInt32, layer: Int, frame: CGRect)] = [(5, 0, front), (7, 0, back)]
+        let managed: (UInt32) -> Bool = { [3, 5, 7].contains($0) }
+        check(Floating.pressed(at: CGPoint(x: 200, y: 110), windows: list, managed: managed, floating: { $0 == 5 }) == 5, "follow: a press on a floating window's title bar follows it")
+        check(Floating.pressed(at: CGPoint(x: 504, y: 150), windows: list, managed: managed, floating: { $0 == 5 }) == 5, "follow: its resize zone just outside the edge counts")
+        check(Floating.pressed(at: CGPoint(x: 450, y: 250), windows: list, managed: managed, floating: { $0 == 7 }) == nil, "follow: a tiled window above a floating one is what the press is on")
+        check(Floating.pressed(at: CGPoint(x: 800, y: 600), windows: list, managed: managed, floating: { $0 == 7 }) == 7, "follow: a floating window below another is pressed where it shows")
+        check(Floating.pressed(at: CGPoint(x: 1000, y: 800), windows: list, managed: managed, floating: { _ in true }) == nil, "follow: a press on no window follows nothing")
+        // Above layer 0: an overlay over the whole display (layer 25, not managed) and a managed window kept on top (layer 3).
+        let onTop = CGRect(x: 150, y: 80, width: 200, height: 150)
+        let layered: [(id: UInt32, layer: Int, frame: CGRect)] = [(9, 25, CGRect(x: 0, y: 0, width: 1440, height: 900)), (3, 3, onTop)] + list
+        check(Floating.pressed(at: CGPoint(x: 200, y: 90), windows: layered, managed: managed, floating: { $0 == 3 || $0 == 5 }) == 3,
+              "follow: a floating window kept on top is pressed above the floating window under it")
+        check(Floating.pressed(at: CGPoint(x: 400, y: 280), windows: layered, managed: managed, floating: { $0 == 5 }) == 5,
+              "follow: an overlay above every window takes no press")
+        check(Floating.pressed(at: CGPoint(x: 200, y: 90), windows: layered, managed: managed, floating: { $0 == 5 }) == nil,
+              "follow: a tiled window kept on top is what the press is on")
+        var f = FloatFollow()
+        check(f.tick(buttonDown: true, frame: front) == .none, "follow: nothing followed, nothing to do")
+        f.start(5)
+        check(f.tick(buttonDown: true, frame: front) == .place(front) && f.frame == front, "follow: the first frame places the ring")
+        check(f.tick(buttonDown: true, frame: front) == .none, "follow: a frame where nothing moved does nothing")
+        let moved = front.offsetBy(dx: 37, dy: -12)
+        check(f.tick(buttonDown: true, frame: moved) == .move(moved.origin) && f.frame == moved, "follow: every frame the window moved moves the ring there")
+        let wider = CGRect(origin: moved.origin, size: CGSize(width: 460, height: 300))
+        check(f.tick(buttonDown: true, frame: wider) == .place(wider), "follow: a frame where it was resized places the ring at its new size")
+        check(f.tick(buttonDown: false, frame: wider) == .end && f.id == nil && f.frame == nil, "follow: the button up ends it")
+        f.start(5)
+        check(f.tick(buttonDown: true, frame: nil) == .end && f.id == nil, "follow: a window that is gone ends it")
     }
 }

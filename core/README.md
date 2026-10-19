@@ -67,12 +67,12 @@ toast:string|null, jump:bool, floating_parked:[u32], shelf:[{id,app,title,desk,h
   where it would go (right of the anchor, or as the newest tab after the active one), but focus, the shown tab and the viewport stay as
   they are: no `reveal`, and the plan's `focus` is `null` (no focus request to the OS, even when the desktop had no focus and the core
   falls back to this window). A column inserted left of the viewport (or at its edge) adds its width to `scroll`, so the columns in view
-  keep their screen position; beside a pin the scroll settles on the nearest rest offset (a ribbon narrower than its band rests
-  against the pin, so a column added at its end moves the others to make room). A floating window never takes focus then. The
+  keep their screen position.
+  A floating window never takes focus then. The
   host's `window_focused` for the window (its app came to the front) focuses and reveals it as usual. The plan's `show_map` is false: the
   map would only flash over what the user is doing. A window coming back from the shelf with `take_focus` false (and `app_shown` with
   `take_focus` false, an app unhidden in the background) returns to its usual place (its desktop, right of that desktop's focused
-  column, several in their old order; back into the pin it left without changing the pin's shown tab), with no focus, desktop switch,
+  column, several in their old order), with no focus, desktop switch,
   scroll or map.
 - **Scroll**: `scroll` is a px offset into the content. `keep_visible` clamps to `[0, content - avail]`;
   `center` mode and the `center` command center exactly (may be negative for the first/last column) and do not clamp
@@ -101,8 +101,7 @@ toast:string|null, jump:bool, floating_parked:[u32], shelf:[{id,app,title,desk,h
   `error`. `arg` may be a number or numeric string. `stack` moves only the focused window to the bottom of the
   left column (no-op at column 0); `unstack` keeps the column's width. `stack_right` is its mirror: the window becomes the
   first row of the column on its right (no-op at the last column). `move_first` / `move_last` carry the focused column,
-  whole, to the start / end of the ribbon. The pinned column refuses `move_first`, `move_last` and `stack_right` like the
-  other structural moves (it answers "Unpin it first"), and takes the height and reorder commands inside itself.
+  whole, to the start / end of the ribbon.
 - **Removal focus**: stack-mate above (else below), else left column, else right column; floating-only leftovers
   as a last resort.
 - **Undo** covers layout changes only (move, width, full, stack/unstack, float); navigation (`focus_*`, `focus_index`,

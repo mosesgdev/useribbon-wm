@@ -78,6 +78,8 @@ final class Controller {
     private var liveUntil: [UInt32: Date] = [:]           // ring follows the real frame while the user drags/resizes
     private var liveResize = false                        // a user resize is being followed: ring, dim and tab bars move with it, nothing eases
     private var dragWarm: (uuid: String, plan: Plan)?     // a ribbon's plan, read when the mouse went down on a title bar
+    private var follow = FloatFollow()                    // a floating window under the pressed button: the ring follows it every frame
+    private let followPacer = FramePacer()
     var scrolling = false                         // a three-finger scroll is in progress
     private var lastScrollHUD = Date.distantPast
     /// Window px per pad width of finger travel, as a multiple of the screen width: 1 = the full pad moves one screen.
@@ -187,7 +189,8 @@ final class Controller {
             return !self.paused && self.started && !self.scrolling && !self.commit.overlayUp && !self.applier.isWriting(id) && self.plannedOnScreen[id] == true && self.tracker.windows[id]?.floating != true
         }
         dragger.liveFrame = { [weak self] id in self?.tracker.liveBounds(id) }
-        dragger.warm = { [weak self] p in self?.warmDragLayout(at: p) }
+        dragger.warm = { [weak self] p in self?.warmDragLayout(at: p); self?.followPress(at: p) }
+        followPacer.onTick = { [weak self] _ in self?.followTick() }
         dragger.plannedFrame = { [weak self] id in self?.plannedFrame[id] }
         dragger.layoutFor = { [weak self] id in self?.dragLayout(for: id) }
         dragger.onEnd = { [weak self] id, outcome in self?.dragEnded(id, outcome) }
@@ -376,7 +379,7 @@ final class Controller {
             updateTrackpad()
             updateWarp()
             ring.hide()
-            dim.hide(); tabs.hideAll(); dragger.cancel(); ringPhase.reset()
+            dim.hide(); tabs.hideAll(); dragger.cancel(); stopFollow(); ringPhase.reset()
             hidePinChrome()
             menu.setPaused(true)
             applier.cancelAndWait()
@@ -485,7 +488,8 @@ final class Controller {
                 break
             }
             // Moved by something other than Ribbon (the user, the app itself): the ring takes the real frame at once, no glide.
-            if dragger.active == nil, !applier.isBusy, id == ringFocus { liveUntil[id] = Date().addingTimeInterval(1); refreshRing(animated: false) }
+            // A floating window held by the mouse is followed every display frame already (`followPress`).
+            if dragger.active == nil, !applier.isBusy, id == ringFocus, follow.id != id { liveUntil[id] = Date().addingTimeInterval(1); refreshRing(animated: false) }
             dragged(id)
         case .title(let id, let t):
             snapshots.markDirty(id)
@@ -1096,15 +1100,61 @@ final class Controller {
         NSWorkspace.shared.frontmostApplication?.processIdentifier == pid || (commit.overlayUp && CACurrentMediaTime() - focusAskedAt < 1)
     }
 
+    /// Live frames come from the window server: one local call, where AX would ask the app twice, and an app busy with a drag
+    /// answers late.
     private func ringFrame(_ id: UInt32) -> CGRect? {
-        if let t = liveUntil[id], t > Date() { return tracker.elements[id]?.frame }
+        if follow.id == id, let f = follow.frame { return f }
+        if let t = liveUntil[id], t > Date() { return tracker.liveBounds(id) }
         if let f = plannedFrame[id] {
             guard plannedOnScreen[id] == true else { return nil }
             // During a swipe/glide the ring follows where the window really is, not where it is headed.
             if scrolling || applier.swipe.isSettling, let p = applier.swipe.position(id) { return CGRect(origin: p, size: f.size) }
             return f
         }
-        return tracker.liveFrame(id)   // floating windows are not in the plan
+        return tracker.liveBounds(id)   // floating windows are not in the plan
+    }
+
+    /// The left button went down at `p` (AX coordinates). On a window Ribbon floats, the ring and the dim follow that window
+    /// every display frame until the button comes up: macOS reports a dragged or resized window to AX only about ten times a
+    /// second, and a ring that waited for those reports trailed the window.
+    private func followPress(at p: CGPoint) {
+        stopFollow()
+        guard started, !paused, settings.focusRing || overlayStyle.isOn,
+              tracker.windows.keys.contains(where: { plannedFrame[$0] == nil && home[$0] != nil }) else { return }
+        let me = Int(ProcessInfo.processInfo.processIdentifier)
+        let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]] ?? []
+        let windows: [(id: UInt32, layer: Int, frame: CGRect)] = list.compactMap { w in
+            guard (w[kCGWindowOwnerPID as String] as? Int) != me, let n = w[kCGWindowNumber as String] as? Int,
+                  let b = w[kCGWindowBounds as String] as? NSDictionary, let r = CGRect(dictionaryRepresentation: b as CFDictionary) else { return nil }
+            return (UInt32(n), w[kCGWindowLayer as String] as? Int ?? 0, r)
+        }
+        guard let id = Floating.pressed(at: p, windows: windows, managed: { tracker.windows[$0] != nil },
+                                        floating: { tracker.windows[$0] != nil && plannedFrame[$0] == nil && home[$0] != nil }),
+              let uuid = home[id] else { return }
+        follow.start(id)
+        followPacer.start(uuid: uuid) { Screens.screen(uuid: uuid) }
+    }
+
+    /// One display frame of a followed floating window. A move only shifts the ring's panel (like a direct-mode swipe) and the
+    /// dim's cutout; the first frame and a resize take the full refresh, without the pin's curtain, which is placed at the end.
+    private func followTick() {
+        let id = follow.id
+        let frame = id.flatMap { tracker.windows[$0] != nil && !paused ? tracker.serverFrame($0) : nil }
+        switch follow.tick(buttonDown: NSEvent.pressedMouseButtons & 1 != 0, frame: frame) {
+        case .none: return
+        case .move(let origin):
+            guard let id, id == ringFocus else { return }
+            if ring.isUp(for: id) { ring.follow(axOrigin: origin); refreshDim(animated: false) } else { refreshRing(animated: false, curtain: false) }
+        case .place: if id == ringFocus { refreshRing(animated: false, curtain: false) }
+        case .end:
+            followPacer.stop()
+            if id == ringFocus, !paused { refreshRing(animated: false) }
+        }
+    }
+
+    private func stopFollow() {
+        follow.stop()
+        followPacer.stop()
     }
 
     // MARK: tabs, dim, drag to reorder
