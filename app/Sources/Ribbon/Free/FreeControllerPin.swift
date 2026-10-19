@@ -15,7 +15,11 @@ extension Controller {
     func curtainTeardown() {}
     func isPinRaiseEcho(_ id: UInt32, arrived: Date) -> Bool { false }
     func pinEdge(on uuid: String) -> PinEdge? { nil }
-    func overlayEdge(_ plan: Plan, shownPin: CGRect?, bar: CGRect?, display disp: CGRect) -> PinEdge? { nil }
+    func overlayEdge(_ plan: Plan, specs: [SwipeOverlay.TileSpec], display disp: CGRect) -> PinEdge? { nil }
+    func heldAfterFocus(_ plan: Plan, gliding: Bool) -> (@MainActor () -> Void)? { nil }
+    func heldLead(_ map: RibbonMap) -> UInt32? { nil }
+    func heldEntry(_ map: RibbonMap, from side: PinSide) -> UInt32? { nil }
+    func heldTabbed(_ map: RibbonMap) -> Bool? { nil }
     func heldBarTarget(of id: UInt32) -> (width: Double, tag: String)? { nil }
     func heldFocusedWindow() -> UInt32? { nil }
     func heldContextRows(of id: UInt32) -> [BarItem]? { nil }

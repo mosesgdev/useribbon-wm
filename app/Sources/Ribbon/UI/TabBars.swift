@@ -54,7 +54,7 @@ extension TabBar {
     var drawn: TabBar { var b = self; b.x = 0; b.y = 0; b.w = 0; b.h = 0; b.onScreen = true; return b }
 
     /// This bar riding with its column's tile at `x` (AX space): there and on screen, to be clipped by the display; without a tile
-    /// (out of the overlay's reach, or a window not moved yet) it is out of sight. The pinned bar never moves.
+    /// (out of the overlay's reach, or a window not moved yet) it is out of sight. A held column's bar (`isPinned`) never moves.
     func riding(at x: Double?) -> TabBar {
         guard !isPinned else { return self }
         var b = self
@@ -67,8 +67,8 @@ enum TabBarPlacement {
     /// Narrower than this, a clipped bar is not worth a panel.
     static let minWidth = 24.0
 
-    /// The bars that show and the rect (AX space) each panel takes: on screen, clipped to `visible` (a pinned bar) or to `area`
-    /// (a ribbon bar: the display beside the pinned column, so it passes beneath the pin with its column instead of across it).
+    /// The bars that show and the rect (AX space) each panel takes: on screen, clipped to `visible` (a held column's bar) or to
+    /// `area` (a ribbon bar: the display beside a held column, so it passes beneath that column with its own instead of across it).
     static func shown(_ bars: [TabBar], visible: CGRect, area: CGRect) -> [(bar: TabBar, rect: CGRect)] {
         bars.compactMap { b in
             let r = b.cg.intersection(b.isPinned ? visible : area)
@@ -168,8 +168,8 @@ final class TabBarController {
     }
 
     private var slots: [String: [Slot]] = [:]       // by display uuid, one per tabbed ribbon column
-    /// The pinned group's bar has a slot of its own, so it never takes over (and glides in from) the panel of a ribbon bar.
-    private var pinSlots: [String: Slot] = [:]
+    /// A held column's bar has a slot of its own, so it never takes over (and glides in from) the panel of a ribbon bar.
+    private var heldSlots: [String: Slot] = [:]
     private var shown: [String: [CGRect]] = [:]
     /// A tab was clicked: the window to show.
     var onSelect: (UInt32) -> Void = { _ in }
@@ -182,7 +182,7 @@ final class TabBarController {
 
     /// Show `bars` for one display (everything the core reported for its active desktop), clipped to `visible` so a bar of a
     /// half-scrolled column never reaches onto the neighbouring display, and a ribbon bar to `ribbonArea` (the display beside
-    /// the pinned column), so it passes beneath the pin with its column instead of across it. `dimmed`: the dim feature is on,
+    /// a held column), so it passes beneath that column with its own instead of across it. `dimmed`: the dim feature is on,
     /// so bars of columns you are not in step back a little with the windows. `moving`: the bars ride with their tiles (a swipe or
     /// a keyboard glide calls this every display frame): a bar that only moved changes nothing but its panel's place.
     func update(_ bars: [TabBar], display uuid: String, visible: CGRect, ribbonArea: CGRect? = nil, dimmed: Bool, animated: Bool, moving: Bool = false) {
@@ -199,10 +199,10 @@ final class TabBarController {
         for (i, slot) in list.enumerated() where !used.contains(i) && slot.panel.isVisible { slot.panel.orderOut(nil) }
         slots[uuid] = list
         if let b = live.first(where: \.bar.isPinned) {
-            let slot = pinSlots[uuid] ?? Slot()
-            pinSlots[uuid] = slot
+            let slot = heldSlots[uuid] ?? Slot()
+            heldSlots[uuid] = slot
             show(b.bar, at: b.rect, in: slot, dimmed: dimmed, animated: animated, moving: moving)
-        } else if let slot = pinSlots[uuid], slot.panel.isVisible { slot.panel.orderOut(nil) }
+        } else if let slot = heldSlots[uuid], slot.panel.isVisible { slot.panel.orderOut(nil) }
         shown[uuid] = live.map(\.bar.cg)
     }
 
@@ -268,13 +268,13 @@ final class TabBarController {
 
     func forget(display uuid: String) {
         (slots[uuid] ?? []).forEach { $0.panel.orderOut(nil) }
-        pinSlots[uuid]?.panel.orderOut(nil)
-        slots[uuid] = nil; pinSlots[uuid] = nil; shown[uuid] = nil
+        heldSlots[uuid]?.panel.orderOut(nil)
+        slots[uuid] = nil; heldSlots[uuid] = nil; shown[uuid] = nil
     }
 
     /// Windows of the bars currently shown (QA).
     var visibleCount: Int { allSlots.filter { $0.panel.isVisible }.count }
-    private var allSlots: [Slot] { slots.values.flatMap { $0 } + pinSlots.values }
+    private var allSlots: [Slot] { slots.values.flatMap { $0 } + heldSlots.values }
 }
 
 @MainActor
@@ -282,19 +282,21 @@ final class TabBarModel: ObservableObject {
     @Published var bar: TabBar?
     /// The panel's width: what the tabs are laid out in (`TabLayout`) and what the hit view tests against.
     @Published var width: CGFloat = 0
-    /// The active tab's slot (what the pin button's menu is about).
+    /// The active tab's slot (what a bar's own trailing button acts on).
     var activeIndex: Int? { bar.flatMap { b in b.tabs.firstIndex { $0.id == b.active } } }
     /// Where the tabs are: the one layout the view draws from and the hit view tests against.
     var layout: [(x: CGFloat, w: CGFloat)] {
-        TabLayout.tabs(count: bar?.tabs.count ?? 0, width: width, pin: bar?.isPinned == true, active: activeIndex ?? 0)
+        TabLayout.tabs(count: bar?.tabs.count ?? 0, width: width, trailing: trailing, active: activeIndex ?? 0)
     }
-    var showsPinButton: Bool { TabLayout.showsPinButton(pin: bar?.isPinned == true, width: width) }
+    /// What the bar keeps free at its trailing end for a feature's button (`HeldBarButton`; 0 when there is none).
+    var trailing: CGFloat { HeldBarButton.trailing(for: bar, width: width) }
+    var showsHeldButton: Bool { trailing > 0 }
     @Published var icons: [UInt32: NSImage?] = [:]
     @Published var hovered: Int?
     @Published var pressed: Int?
-    /// The pin button of a pinned group's bar.
-    @Published var pinHovered = false
-    @Published var pinPressed = false
+    /// The bar's trailing button, when a feature gives it one.
+    @Published var heldHovered = false
+    @Published var heldPressed = false
     @Published var receded = false
     /// The tab that just became active (keyboard or click): pulses once so you see where you landed.
     @Published var pulse: UInt32?
@@ -309,7 +311,7 @@ struct TabBarView: View {
 
     /// Liquid Glass the canonical way: a container so neighbouring glass shapes blend and morph, and every tab its own glass
     /// capsule (own hover, own press, own hit target). No bar behind them: the glass floats on the content layer.
-    /// A pinned group's bar ends in one more glass circle, the pin button.
+    /// A feature may end the bar in one more glass shape of its own (`HeldBarButton`).
     /// Everything is drawn where `TabLayout` puts it, which is also where the hit view looks, inside exactly the panel's width:
     /// a tab that does not fit is not drawn, and whatever a tab's own content would like, the bar clips at its edge.
     var body: some View {
@@ -321,11 +323,7 @@ struct TabBarView: View {
                     tabView(tab, active: tab.id == model.bar?.active, hovered: model.hovered == i, pressed: model.pressed == i, width: t[i].w)
                         .padding(.leading, t[i].x)
                 }
-                if model.showsPinButton {
-                    PinTabButton(hovered: model.pinHovered, pressed: model.pinPressed, glass: glass)
-                        .padding(.leading, TabLayout.pinButtonFrame(width: model.width).x)
-                        .transition(.opacity.combined(with: .scale(scale: 0.6)))
-                }
+                HeldBarButton(model: model, glass: glass)
             }
             .padding(.vertical, 2)
         }
@@ -333,12 +331,12 @@ struct TabBarView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .opacity(model.receded ? 0.72 : 1)
         .animation(reduceMotion ? nil : .smooth(duration: 0.12), value: model.pressed)
-        .animation(reduceMotion ? nil : .smooth(duration: 0.12), value: model.pinPressed)
+        .animation(reduceMotion ? nil : .smooth(duration: 0.12), value: model.heldPressed)
         .animation(reduceMotion ? nil : .smooth(duration: 0.2), value: model.bar?.isPinned)
         .animation(reduceMotion ? nil : .smooth(duration: 0.2), value: tabs.map(\.id))
         .animation(reduceMotion ? nil : .smooth(duration: 0.18), value: model.bar?.active)
         .animation(reduceMotion ? nil : Theme.micro, value: model.hovered)
-        .animation(reduceMotion ? nil : Theme.micro, value: model.pinHovered)
+        .animation(reduceMotion ? nil : Theme.micro, value: model.heldHovered)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Tabs")
     }
@@ -433,14 +431,13 @@ final class TabBarHitView: NSView {
         addTrackingArea(a); area = a
     }
 
-    private var pinned: Bool { model.bar?.isPinned == true }
     /// Hit-testing goes by the model's width and layout, which are what the view draws from (not the panel's own width, which
     /// glides while the bar moves to a new frame).
     private func index(_ e: NSEvent) -> Int? {
-        TabLayout.index(at: convert(e.locationInWindow, from: nil).x, count: model.bar?.tabs.count ?? 0, width: model.width, pin: pinned, active: model.activeIndex ?? 0)
+        TabLayout.index(at: convert(e.locationInWindow, from: nil).x, count: model.bar?.tabs.count ?? 0, width: model.width, trailing: model.trailing, active: model.activeIndex ?? 0)
     }
-    /// The pin button at the end of a pinned group's bar.
-    private func overPinButton(_ e: NSEvent) -> Bool { pinned && TabLayout.inPinButton(x: convert(e.locationInWindow, from: nil).x, width: model.width) }
+    /// The trailing button a feature may end the bar with.
+    private func overHeldButton(_ e: NSEvent) -> Bool { TabLayout.inTrailing(x: convert(e.locationInWindow, from: nil).x, width: model.width, trailing: model.trailing) }
     /// The ✕ of the hovered tab (pop out into its own column); only a tab with a title has one.
     private func onClose(_ e: NSEvent, _ i: Int) -> Bool {
         let t = model.layout[i]
@@ -448,25 +445,25 @@ final class TabBarHitView: NSView {
     }
     var onCycle: (Int) -> Void = { _ in }
     var onAction: (TabAction) -> Void = { _ in }
-    private var downIndex: Int?, downPoint = NSPoint.zero, dragged = false, pinDown = false
+    private var downIndex: Int?, downPoint = NSPoint.zero, dragged = false, heldDown = false
     private var wheel = 0.0, lastWheel = Date.distantPast
 
     override func mouseMoved(with event: NSEvent) {
-        let onButton = overPinButton(event)
-        model.pinHovered = onButton
+        let onButton = overHeldButton(event)
+        model.heldHovered = onButton
         let i = onButton ? nil : index(event)
         model.hovered = i
-        if onButton { toolTip = PinTabButton.tooltip(for: model.bar) }
+        if onButton { toolTip = HeldBarButton.tooltip(for: model.bar) }
         else if let i, let t = model.bar?.tabs[i] {
             toolTip = onClose(event, i) ? "Move to its own column" : (t.title.isEmpty ? t.app : "\(t.title) (\(t.app))")
         } else { toolTip = nil }
     }
-    override func mouseExited(with event: NSEvent) { model.hovered = nil; model.pinHovered = false; toolTip = nil }
+    override func mouseExited(with event: NSEvent) { model.hovered = nil; model.heldHovered = false; toolTip = nil }
     override func mouseDown(with event: NSEvent) {
-        if overPinButton(event) {
+        if overHeldButton(event) {
             // Like any button: it acts on release, and only if the pointer is still on it.
             if event.modifierFlags.contains(.control), let a = model.activeIndex { showMenu(event, tab: a); return }
-            model.pinPressed = true; pinDown = true
+            model.heldPressed = true; heldDown = true
             return
         }
         guard let i = index(event), let tab = model.bar?.tabs[i] else { return }
@@ -487,9 +484,9 @@ final class TabBarHitView: NSView {
         downIndex = to
     }
     override func mouseUp(with event: NSEvent) {
-        if pinDown {
-            pinDown = false; model.pinPressed = false
-            if overPinButton(event), let id = model.bar?.active, let a = PinTabButton.action(for: id) { onAction(a) }
+        if heldDown {
+            heldDown = false; model.heldPressed = false
+            if overHeldButton(event), let id = model.bar?.active, let a = HeldBarButton.action(for: id) { onAction(a) }
             return
         }
         model.pressed = nil; downIndex = nil
@@ -498,7 +495,7 @@ final class TabBarHitView: NSView {
         if let i = index(event), let tab = model.bar?.tabs[i] { onAction(.popOut(tab.id)) }
     }
     override func rightMouseDown(with event: NSEvent) {
-        if overPinButton(event), let a = model.activeIndex { showMenu(event, tab: a) } else if let i = index(event) { showMenu(event, tab: i) }
+        if overHeldButton(event), let a = model.activeIndex { showMenu(event, tab: a) } else if let i = index(event) { showMenu(event, tab: i) }
     }
 
     private func showMenu(_ event: NSEvent, tab i: Int) {
@@ -517,7 +514,7 @@ final class TabBarHitView: NSView {
         }
         add("Move to its own column", "rectangle.portrait.and.arrow.right", .popOut(id))
         menu.addItem(.separator())
-        // What the running edition's features add for this tab (Plus: a pinned group can let go, swap edges or follow you to every desktop).
+        // What the running edition's features add for this tab.
         let extra = TabMenuFeature.entries(for: bar, context: ctx)
         for it in extra { add(it.title, it.symbol, .command(id, it.name, it.arg), keys: it.keys, checked: it.checked) }
         if !extra.isEmpty { menu.addItem(.separator()) }
@@ -525,9 +522,8 @@ final class TabBarHitView: NSView {
         add("Move right", "arrow.right", .moveRight(id), enabled: i < bar.tabs.count - 1)
         menu.addItem(.separator())
         add("Show as stack", "rectangle.split.1x2", .showAsStack(id))
-        // The core keeps a held group together: no splitting it into columns.
-        if !bar.isPinned { add("Close tab group", "rectangle.split.3x1", .closeGroup(id)) }
-        add(bar.isPinned ? "Float this window" : "Keep out of the ribbon", "rectangle.on.rectangle", .keepOut(id))
+        if TabMenuFeature.closesGroup(bar) { add("Close tab group", "rectangle.split.3x1", .closeGroup(id)) }
+        add(TabMenuFeature.keepOutTitle(bar) ?? "Keep out of the ribbon", "rectangle.on.rectangle", .keepOut(id))
         model.pressed = nil
         NSMenu.popUpContextMenu(menu, with: event, for: self)
     }

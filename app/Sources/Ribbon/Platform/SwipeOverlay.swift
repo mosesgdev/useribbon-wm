@@ -14,14 +14,14 @@ import SwiftUI
 /// reach), the real windows are written once under them, the tiles spring to the new layout, and the focus ring travels with its
 /// tile.
 ///
-/// A column held outside the ribbon (Plus: the pinned column) dresses the overlay through `OverlayEdge`: ribbon tiles pass beneath
+/// A column held outside the ribbon (Plus) dresses the overlay through `OverlayEdge`: ribbon tiles pass beneath
 /// its tile, blurred and dissolved into the backdrop as they near it, and nothing of the ribbon draws on its side (the clip). The
 /// free edition's `OverlayEdge` does nothing, and the layers here are the backdrop, the floating windows and the ribbon's tiles.
 ///
 /// Coordinates: tiles are placed in AX space (top-left origin) relative to the display's AX frame; the tile layers are flipped.
 @MainActor
 final class SwipeOverlay {
-    struct TileSpec: Equatable { let id: UInt32; let rect: CGRect; let pid: pid_t; var pinned = false }
+    struct TileSpec: Equatable { let id: UInt32; let rect: CGRect; let pid: pid_t; var held = false }
     /// A window the ribbon does not move (see `OverlayFloaters`): `rect` is its frame in AX space; `above`: drawn over the whole ribbon,
     /// else beneath the tiles.
     struct FloaterSpec: Equatable { let id: UInt32; let rect: CGRect; let pid: pid_t; let above: Bool }
@@ -33,7 +33,7 @@ final class SwipeOverlay {
     }
     /// `size` and `planY` are the planned rect (the motion and the staging check use them); `y` and `look` are where the layer
     /// is drawn, the window's real height and size when it refuses the planned one.
-    private struct Tile { let layer: CALayer; let size: CGSize; let planY: CGFloat; var y: CGFloat; var look: CGSize; var x: Double; var placeholder: Bool; var pinned = false }
+    private struct Tile { let layer: CALayer; let size: CGSize; let planY: CGFloat; var y: CGFloat; var look: CGSize; var x: Double; var placeholder: Bool; var held = false }
 
     private var panel: Panel?
     /// `container`, back to front: the backdrop, the floating windows beneath the ribbon, the ribbon tiles (inside `ribbonClip`), what a
@@ -151,7 +151,7 @@ final class SwipeOverlay {
 
     /// Builds the layers for the next swipe while the panel is still invisible (fingers resting on the pad), so that
     /// `reveal()` at the first movement is just an opacity flip. `signature` identifies what the layers show.
-    /// `edge`: the pinned column on this display, in display coordinates (top-left origin), if any.
+    /// `edge`: where the ribbon meets a held column (Plus) on this display, in display coordinates (top-left origin), if any.
     func stage(on screen: NSScreen, displayAX: CGRect, backdrop: CGImage?, softBackdrop: CGImage?, tiles specs: [TileSpec], edge: PinEdge?, signature: String,
                image: (UInt32, CGSize) -> CGImage?, realFrame: (UInt32) -> CGRect?, softened: (UInt32) -> CGImage?, icon: (pid_t) -> NSImage?) {
         prewarm(on: screen)
@@ -165,7 +165,7 @@ final class SwipeOverlay {
         showBackdrop(backdrop, soft: softBackdrop)
         dressing.layOut(edge, ribbonClip: ribbonClip, bounds: backdropLayer.frame)            // the whole display, like the backdrop the dissolve shows
         let scale = screen.backingScaleFactor
-        // Left to right; the pinned tiles go above the blur strip, so ribbon tiles slide beneath them as the real windows do.
+        // Left to right; held tiles go above what the edge adds, so ribbon tiles slide beneath them as the real windows do.
         for s in specs.sorted(by: { $0.rect.minX < $1.rect.minX }) {
             addTile(s, scale: scale, image: image, realFrame: realFrame, softened: softened, icon: icon)
         }
@@ -192,9 +192,9 @@ final class SwipeOverlay {
         l.position = CGPoint(x: x, y: look.minY - displayAX.minY)
         if let img { l.contents = img } else { Self.makePlaceholder(l, icon: icon(s.pid)) }
         Self.shade(l, image: img)
-        dressing.place(l, held: s.pinned, in: ribbonClip)
-        tiles[s.id] = Tile(layer: l, size: s.rect.size, planY: y, y: look.minY - displayAX.minY, look: look.size, x: x, placeholder: img == nil, pinned: s.pinned)
-        if !s.pinned, img != nil, let soft = softened(s.id) { setEdgeTile(s.id, soft) }
+        dressing.place(l, held: s.held, in: ribbonClip)
+        tiles[s.id] = Tile(layer: l, size: s.rect.size, planY: y, y: look.minY - displayAX.minY, look: look.size, x: x, placeholder: img == nil, held: s.held)
+        if !s.held, img != nil, let soft = softened(s.id) { setEdgeTile(s.id, soft) }
     }
 
     /// Brings staged layers (kept, or gliding right now) in line with the next keyboard move without touching the rest: `add` tiles
@@ -216,7 +216,7 @@ final class SwipeOverlay {
             addTile(s, scale: scale, image: image, realFrame: realFrame, softened: softened, icon: icon)
         }
         for (id, ax) in snap {
-            guard var t = tiles[id], !t.pinned else { continue }
+            guard var t = tiles[id], !t.held else { continue }
             t.x = ax - displayAX.minX
             t.layer.position = CGPoint(x: t.x, y: t.y)
             dressing.moveTwin(id, to: t.layer.position)
@@ -251,7 +251,7 @@ final class SwipeOverlay {
 
     /// Follows the window leading the band: the blur rises while it travels beneath a held column and falls as it comes out.
     private func updateEdge(now: Double) {
-        dressing.update(now: now, tiles: tiles.values.filter { !$0.pinned }.map { (x: CGFloat($0.x), w: $0.size.width) })
+        dressing.update(now: now, tiles: tiles.values.filter { !$0.held }.map { (x: CGFloat($0.x), w: $0.size.width) })
     }
 
     /// Makes the staged layers visible. The floating windows are looked at again first unless that was done within `floatersMaxAge`
@@ -325,7 +325,7 @@ final class SwipeOverlay {
 
     /// The softened twin of a ribbon tile (inside the blur strip, drawn where the tile is).
     private func setEdgeTile(_ id: UInt32, _ img: CGImage) {
-        guard let t = tiles[id], !t.pinned else { return }
+        guard let t = tiles[id], !t.held else { return }
         dressing.setTwin(id, img, look: t.look, at: CGPoint(x: t.x, y: t.y))
     }
 
@@ -367,7 +367,7 @@ final class SwipeOverlay {
 
     /// The soft, even shadow of a tile. Real windows have shadows, and the snapshots are taken without them (and the backdrop leaves
     /// the windows out with theirs), so without this every shadow would vanish the instant the overlay appears and return as it
-    /// fades. It also lifts the pin above what passes beneath it.
+    /// fades. It also lifts a held tile above what passes beneath it.
     static func shade(_ l: CALayer, image: CGImage?) {
         l.shadowColor = NSColor.black.cgColor
         l.shadowOpacity = 0.32; l.shadowRadius = 16; l.shadowOffset = .zero
@@ -479,7 +479,7 @@ final class SwipeOverlay {
     /// be while two windows pass each other (a column swap). Nil = none.
     func raise(_ id: UInt32?) {
         CATransaction.begin(); CATransaction.setDisableActions(true)
-        Self.raise(id, from: raised, in: tiles.filter { !$1.pinned }.mapValues(\.layer))
+        Self.raise(id, from: raised, in: tiles.filter { !$1.held }.mapValues(\.layer))
         CATransaction.commit()
         raised = id
     }
@@ -492,13 +492,13 @@ final class SwipeOverlay {
 
     // MARK: motion
 
-    /// Absolute AX x of tiles (the core's logical positions). Tiles not named stay where they are, and so do pinned ones: the
-    /// pin holds still while everything slides beneath it (a visual lead or a release velocity must never nudge it).
+    /// Absolute AX x of tiles (the core's logical positions). Tiles not named stay where they are, and so do held ones: a
+    /// held column holds still while everything slides beneath it (a visual lead or a release velocity must never nudge it).
     func move(_ xs: [UInt32: Double]) {
         glide.cancel()
         CATransaction.begin(); CATransaction.setDisableActions(true)
         for (id, ax) in xs {
-            guard var t = tiles[id], !t.pinned else { continue }
+            guard var t = tiles[id], !t.held else { continue }
             t.x = ax - displayAX.minX
             t.layer.position = CGPoint(x: t.x, y: t.y)
             dressing.moveTwin(id, to: t.layer.position)
@@ -521,7 +521,7 @@ final class SwipeOverlay {
     func settle(to finals: [UInt32: Double], velocity: Double, now: Double, lazyClock: Bool = true) {
         var targets: [UInt32: Double] = [:], rendered: [UInt32: Double] = [:]
         for (id, ax) in finals {
-            guard let t = tiles[id], !t.pinned else { continue }
+            guard let t = tiles[id], !t.held else { continue }
             targets[id] = ax - displayAX.minX; rendered[id] = t.x
         }
         glide.retarget(to: targets, from: rendered, velocity: velocity, at: now, lazyClock: lazyClock)
@@ -593,7 +593,7 @@ final class SwipeOverlay {
         if ringLayer.contents == nil || ringID == nil { dressRing() }
         ringID = id
         // Under its window like the real ring; below every ribbon tile, so a ring on its way never draws across the others.
-        if tile.pinned { tile.layer.superlayer?.insertSublayer(ringLayer, below: tile.layer) } else { ribbonClip.insertSublayer(ringLayer, at: 0) }
+        if tile.held { tile.layer.superlayer?.insertSublayer(ringLayer, below: tile.layer) } else { ribbonClip.insertSublayer(ringLayer, at: 0) }
         placeRing(now: now)
         CATransaction.commit()
     }
@@ -658,8 +658,8 @@ final class SwipeOverlay {
     /// the whole swipe, because it sits above the real dim panel. As that panel does, everything but the focus window is darkened
     /// (Blur: frosted under a light tint), the focus window and its tab bar are cut out, and nothing here costs a frame: each
     /// ribbon tile carries its own tint, so the tint moves with its tile, and only the backdrop's cutout is placed per frame.
-    /// `area`: the display's usable area (AX); `bar`: the focus column's tab bar relative to its tile, if it has one. The pinned
-    /// tile is darkened like the others unless it holds the focus: with the focus in the ribbon the real dim panel sits above the pin.
+    /// `area`: the display's usable area (AX); `bar`: the focus column's tab bar relative to its tile, if it has one. A held
+    /// tile is darkened like the others unless it holds the focus: with the focus in the ribbon the real dim panel sits above it.
     func setDim(_ style: OverlayStyle, area: CGRect, focus: UInt32?, bar: CGRect?, softened: (UInt32) -> CGImage?, softBackdrop: CGImage?) {
         removeDim()
         guard style.isOn, panel != nil else { return }

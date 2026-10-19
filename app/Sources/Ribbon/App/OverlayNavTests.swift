@@ -9,7 +9,7 @@ enum OverlayNavTests {
     static func run(_ check: (Bool, String) -> Void) {
         let disp = CGRect(x: 0, y: 0, width: 3840, height: 1200)
         func tile(_ id: UInt32, _ x: Double, w: Double = 1400, y: Double = 42, h: Double = 1100, pinned: Bool = false) -> Spec {
-            Spec(id: id, rect: CGRect(x: x, y: y, width: w, height: h), pid: pid_t(100 + id), pinned: pinned)
+            Spec(id: id, rect: CGRect(x: x, y: y, width: w, height: h), pid: pid_t(100 + id), held: pinned)
         }
         func layout(_ xs: [Double], desk: Int = 1) -> NavLayout {
             NavLayout(desktop: desk, specs: xs.enumerated().map { tile(UInt32($0.offset + 1), $0.element) }, edge: nil)

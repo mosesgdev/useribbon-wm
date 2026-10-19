@@ -9,8 +9,7 @@ import AppKit
 /// - the drop target under the pointer is previewed with the glass indicator,
 /// and on release the window is moved (`move_window_to`), or snapped back to its slot when nothing was targeted or it barely moved.
 ///
-/// The pinned column is a drop target too (its title-bar zone makes a tab, its body takes the window in), and a window dragged
-/// out of the pin onto a ribbon target leaves it.
+/// A column held outside the ribbon (Plus) is a drop target of its own rules (`HeldDropColumn`).
 ///
 /// The class owns only the state machine and the clock (one tick per display refresh, on the display being dragged on);
 /// geometry lives in `DropRule` (pure), everything about windows and engines is injected, so the controller stays the one place
@@ -23,8 +22,8 @@ final class WindowDragger {
         var usable: CGRect
         var gap: CGFloat
         var source: (column: Int, alone: Bool, row: Int)?
-        /// Set instead of `source` when the dragged window is one of the pin's (it has no ribbon column).
-        var pinSource: (alone: Bool, row: Int)? = nil
+        /// A column held outside the ribbon (Plus), if the display has one.
+        var held: HeldDropColumn? = nil
         /// The display (UUID) the ribbon is on: the frame clock follows it.
         var display: String? = nil
     }
@@ -92,14 +91,14 @@ final class WindowDragger {
 
     private func target() -> DropTarget? {
         guard let l = layout else { return nil }
-        return DropRule.target(pointer: pointer(), columns: l.columns, usable: l.usable, gap: l.gap, source: l.source, pinSource: l.pinSource)
+        return DropRule.target(pointer: pointer(), columns: l.columns, usable: l.usable, gap: l.gap, source: l.source, held: l.held)
     }
 
     private func tick() {
         guard let id = active else { return }
         guard buttonDown() else { finish(id); return }
         guard let l = layout else { return }
-        indicator.show(target().flatMap { DropRule.mark(for: $0, columns: l.columns, usable: l.usable, gap: l.gap) }, over: l.usable)
+        indicator.show(target().flatMap { DropRule.mark(for: $0, columns: l.columns, usable: l.usable, gap: l.gap, held: l.held) }, over: l.usable)
     }
 
     private func finish(_ id: UInt32) {

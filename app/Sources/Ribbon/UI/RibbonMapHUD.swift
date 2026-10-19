@@ -81,13 +81,13 @@ struct RibbonMapView: View {
     /// A column held outside the ribbon (Plus) sits outside the scrolling track at the strip's edge, parted from it by a glyph.
     private func rail(_ g: HUDStrip) -> some View {
         HStack(spacing: 0) {
-            if g.pin != nil, g.pinLeft { pinTile(g); if g.hasTrack { pinGlyph } }
+            heldBlock(g, leading: true)
             if g.hasTrack {
                 if g.over { more(g.hiddenLeft, left: true) }
                 track(g)
                 if g.over { more(g.hiddenRight, left: false) }
             }
-            if g.pin != nil, !g.pinLeft { if g.hasTrack { pinGlyph }; pinTile(g) }
+            heldBlock(g, leading: false)
         }
         .frame(height: L.tileH)
     }
@@ -149,7 +149,7 @@ struct RibbonMapView: View {
         let dragging = d?.from == i
         let slots = d.flatMap { d in drop.map { L.slide(of: i, drag: d, drop: $0) } } ?? 0
         // Tiles that make room move by exactly the dragged tile's width plus the gap: where they will sit after the drop.
-        let room = d.map { $0.isPin ? (g.pin?.w ?? 0) + L.gap : (g.tiles.indices.contains($0.from) ? g.tiles[$0.from].w + L.gap : 0) } ?? 0
+        let room = d.map { $0.held != nil ? (g.held?.w ?? 0) + L.gap : (g.tiles.indices.contains($0.from) ? g.tiles[$0.from].w + L.gap : 0) } ?? 0
         let focusedHere = col.windows.contains { $0.id == model.focusID }
         let hoveredHere = col.windows.contains { $0.id == model.hoverID }
         let offscreen = !col.visible && !focusedHere && !dragging
@@ -167,14 +167,14 @@ struct RibbonMapView: View {
             .zIndex(dragging ? 10 : (focusedHere ? 2 : 1))
     }
 
-    /// A column's tile, ribbon or pin (`i` nil): its slivers, focus ring, count badge and plate shadow. Where it sits is up to
+    /// A column's tile, the ribbon's or a held column's (`i` nil): its slivers, focus ring, count badge and plate shadow. Where it sits is up to
     /// the caller. `target` lights it as the place a dragged tile would land.
     func face(_ col: MapColumn, _ t: HUDStrip.Tile, at i: Int?, focused: Bool, dragging: Bool, target: Bool = false) -> some View {
         let pressedWhole: Bool = {
             guard t.rows.count == 1 else { return false }
             switch model.pressed {
             case .window(let c, _)?: return c == i
-            case .pin?: return i == nil
+            case .held?: return i == nil
             default: return false
             }
         }()
@@ -204,7 +204,7 @@ struct RibbonMapView: View {
         let w = col.windows[r]
         let focused = w.id == model.focusID
         let hovered = w.id == model.hoverID
-        let pressed = n > 1 && model.pressed == (i.map { .window(col: $0, row: r) } ?? .pin(row: r))
+        let pressed = n > 1 && model.pressed == (i.map { .window(col: $0, row: r) } ?? HeldHit.hit(row: r))
         let inner = L.sliverRadius
         let shape = UnevenRoundedRectangle(topLeadingRadius: k > 0 ? inner : 0, bottomLeadingRadius: k < n - 1 ? inner : 0,
                                            bottomTrailingRadius: k < n - 1 ? inner : 0, topTrailingRadius: k > 0 ? inner : 0, style: .continuous)
@@ -374,7 +374,7 @@ final class HUDController {
     private var hideTask: Task<Void, Never>?
     private var hovering = false
     /// Held open by a held modifier (the ⌘Tab-style peek); `release()` lets go.
-    private var pinned = false
+    private var heldOpen = false
     private static let margin: CGFloat = 6
     private static let linger = 1200
     private static let summonedLinger = 6000
@@ -384,7 +384,7 @@ final class HUDController {
     private var toastClock = ToastClock()
     /// Toasts live in their own pill above the strip (design B), so the strip's caption keeps naming your window.
     let pill = ToastPillController()
-    /// A command's shortcut as the pill's hints name it ("⌃⌥K to unpin"). Follows the modifier preset by default; the controller
+    /// A command's shortcut as the pill's hints name it ("⌃⌥T to switch"). Follows the modifier preset by default; the controller
     /// can swap in the shortcut store's live keys (per-action overrides included).
     var keyText: (String) -> String? = { HUDController.presetKey($0) }
 
@@ -405,12 +405,12 @@ final class HUDController {
         _ = toastClock.resolve(new: toast, current: nil, now: now, lingerMs: Self.toastLinger)
         model.map = map
         model.toast = nil
-        // The pin has no ribbon index: with no focus given, its own window is the focus.
-        model.focusID = focus ?? map.columns.first(where: \.focused)?.windows.first?.id ?? HUDCaption.pinFocus(map, nil)?.id
+        // A held column has no ribbon index: with no focus given, its own window is the focus.
+        model.focusID = focus ?? map.columns.first(where: \.focused)?.windows.first?.id ?? HUDCaption.heldFocus(map, nil)?.id
         place(p)
-        // An empty desktop already says so in the strip's own caption line (unless the pin has focus and the caption names it);
-        // the pill would repeat it word for word.
-        if let toast, !(map.columns.isEmpty && HUDCaption.pinFocus(map, model.focusID) == nil && toast.hasSuffix(" · empty")) {
+        // An empty desktop already says so in the strip's own caption line (unless a held column has focus and the caption names
+        // it); the pill would repeat it word for word.
+        if let toast, !(map.columns.isEmpty && HUDCaption.heldFocus(map, model.focusID) == nil && toast.hasSuffix(" · empty")) {
             let (text, hint) = Self.pillText(toast, map: map, focus: model.focusID, key: keyText)
             pill.show(text: text, hint: hint, diagram: ToastDiagram.make(toast: toast, map: map, focus: model.focusID),
                       above: p.frame.insetBy(dx: Self.margin, dy: Self.margin), lingerMs: Self.toastLinger)
@@ -451,9 +451,9 @@ final class HUDController {
     func summon(map: RibbonMap, focus: UInt32?) { show(map: map, focus: focus, linger: Self.summonedLinger) }
 
     /// Shown while a modifier is held: stays up (and updates live) until `release()`.
-    func hold(map: RibbonMap, focus: UInt32?) { pinned = true; show(map: map, focus: focus) }
+    func hold(map: RibbonMap, focus: UInt32?) { heldOpen = true; show(map: map, focus: focus) }
     /// Letting go hides the strip, but never cuts a toast short (a tap on a hotkey is also a modifier hold and release).
-    func release() { pinned = false; scheduleHide(after: toastClock.remainingMs(now: Date())) }
+    func release() { heldOpen = false; scheduleHide(after: toastClock.remainingMs(now: Date())) }
 
     /// A command's default shortcut as keycap text ("⌃⌥K"), from the modifier preset; nil when it has none in the table.
     nonisolated static func presetKey(_ command: String) -> String? {
@@ -476,7 +476,7 @@ final class HUDController {
 
     func hideNow() {
         pill.hideNow()
-        hideTask?.cancel(); hovering = false; pinned = false
+        hideTask?.cancel(); hovering = false; heldOpen = false
         toastClock = ToastClock()
         stopPolling()
         model.visible = false; clearPointer(); model.drag = nil
@@ -497,7 +497,7 @@ final class HUDController {
             var window: UInt32?, desk: Int?
             switch hit {
             case .window(let c, let r)?: window = model.map.columns[c].windows[r].id
-            case .pin(let r)?: window = HUDCaption.pinWindow(model.map, row: r)?.id
+            case .held(let h)?: window = h.window(in: model.map)?.id
             case .dot(let d)?: desk = d
             case nil: break
             }
@@ -510,11 +510,11 @@ final class HUDController {
         case .drag:
             guard let press else { return }
             let dx = p.x - press.point.x
-            // A tile of the ribbon or the pinned tile: both lift once the pointer has moved a few points.
+            // A tile of the ribbon or a held column's: both lift once the pointer has moved a few points.
             let grabbed: HUDDrag? = {
                 switch press.hit {
                 case .window(let c, _)?: return HUDDrag(from: c, dx: dx)
-                case .pin(let r)?: return .pinned(row: r, dx: dx)
+                case .held(let h)?: return h.grab(dx: dx)
                 default: return nil
                 }
             }()
@@ -537,7 +537,7 @@ final class HUDController {
                 }
             } else if case .window(let c, let r)? = press.hit, case .window(let c2, let r2)? = hit, c == c2, r == r2 {
                 model.onCommands(HUDLayout.focusCommand(model.map.columns[c].windows[r].id))
-            } else if case .pin(let r)? = press.hit, case .pin(let r2)? = hit, r == r2, let w = HUDCaption.pinWindow(model.map, row: r) {
+            } else if case .held(let h)? = press.hit, hit == press.hit, let w = h.window(in: model.map) {
                 model.onCommands(HUDLayout.focusCommand(w.id))
             } else if case .dot(let d)? = press.hit, case .dot(let d2)? = hit, d == d2 {
                 model.onCommands(HUDLayout.desktopCommand(d))
@@ -579,7 +579,7 @@ final class HUDController {
     /// `force` ignores the pointer (after a click); otherwise hovering cancels the timer and exit restarts it.
     private func scheduleHide(after ms: Int, force: Bool = false) {
         hideTask?.cancel()
-        if (hovering || pinned) && !force { return }
+        if (hovering || heldOpen) && !force { return }
         hideTask = Task { [weak self] in
             try? await Task.sleep(for: .milliseconds(ms))   // restarts on every change
             guard !Task.isCancelled, let self else { return }

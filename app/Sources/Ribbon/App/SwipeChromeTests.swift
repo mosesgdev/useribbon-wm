@@ -72,7 +72,7 @@ enum SwipeChromeTests {
         o.presents = false
         let disp = CGRect(origin: .zero, size: screen.frame.size)
         var specs = xs.enumerated().map { SwipeOverlay.TileSpec(id: UInt32($0.offset + 1), rect: CGRect(x: $0.element, y: 38, width: 700, height: 800), pid: 1) }
-        if let pin = pinnedAt { specs.append(SwipeOverlay.TileSpec(id: pin, rect: CGRect(x: 12, y: 38, width: 500, height: 800), pid: 1, pinned: true)) }
+        if let pin = pinnedAt { specs.append(SwipeOverlay.TileSpec(id: pin, rect: CGRect(x: 12, y: 38, width: 500, height: 800), pid: 1, held: true)) }
         o.stage(on: screen, displayAX: disp, backdrop: nil, softBackdrop: nil, tiles: specs, edge: nil, signature: "chrome",
                 image: { _, _ in nil }, realFrame: { _ in nil }, softened: { _ in nil }, icon: { _ in nil })
         o.reveal()

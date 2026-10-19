@@ -38,7 +38,7 @@ final class Controller {
     private let tabs = TabBarController()               // tab bars of tabbed columns
     private let appIcons = AppIconCache()               // app icons by process: the tab bars and the strip never ask the system per frame
     let dim = DimOverlay()                      // "Other windows: Dim / Blur" and Focus mode
-    let pinFeature = PinState()                      // what the pinned column keeps here (empty in the free edition)
+    let pinFeature = PinState()                      // what a Plus feature keeps here (empty in the free edition)
     private var ringPhase = RingVisibility()            // ring + cutout hide while a window is dragged
     private var focusSession = FocusSession.follow      // Focus mode: a session choice, never saved (off at launch)
     private let dragger = WindowDragger()               // title-bar drag to reorder
@@ -550,7 +550,7 @@ final class Controller {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) { [weak self] in
             MainActor.assumeIsolated {
                 guard let self, !self.paused, self.reconcileSeq == seq, !self.applier.isBusy, !self.scrolling, !self.commit.overlayUp else { return }
-                self.raisePinned(); self.refreshCurtain(animated: false)      // the glide is over: nothing of the ribbon may stay above the pin
+                self.raisePinned(); self.refreshCurtain(animated: false)      // the glide is over: nothing of the ribbon may stay above a held column
                 for (id, want) in self.plannedFrame.sorted(by: { $0.key < $1.key }) where self.plannedOnScreen[id] == true {
                     guard let live = self.tracker.liveFrame(id), self.tracker.windows[id]?.floating != true else { continue }
                     // A window clipped by the display edge (or sliding there) is sized by macOS/the app, not by the user: never adopt it.
@@ -647,7 +647,7 @@ final class Controller {
 
     /// Every ~5 s: every app is re-listed off the main thread (vanished and missed windows) and its frames come back to `checkDrift`.
     private func periodicCheck() {
-        // Safety net, idempotent: a changed wallpaper or appearance drops the slices; the curtain is placed and the pin raised again.
+        // Safety net, idempotent: a changed wallpaper or appearance drops the slices; a Plus feature's chrome is placed again.
         if curtainWallpaperChanged() { snapshots.markBackdropDirty() }
         SnapshotStore.refreshPermission()      // keyboard moves use it without a swipe ever reading it at touch-down
         followLive()                           // typing or terminal output in the focused window keeps its picture fresh
@@ -791,7 +791,7 @@ final class Controller {
             let file = SessionFile.make(from: core, identify: { [tracker] id in
                 tracker.windows[id].map { SessionWindow(id: id, pid: $0.pid, key: self.sessionKey($0), title: $0.title) }
             }, now: now)
-            return file.desks.isEmpty && file.pin == nil ? nil : (u, file)   // a display holding only its pin still counts
+            return file.desks.isEmpty && file.pin == nil ? nil : (u, file)   // a display holding only a held column still counts
         }
         return SessionFile.combine(parts, primary: primaryUUID, now: now)
     }
@@ -803,10 +803,10 @@ final class Controller {
         let held = heldBarTarget(of: id)             // in a column held outside the ribbon: that column's share of the whole display
         if let held { width = held.width }
         return BarTarget(id: id, title: w.title.isEmpty ? w.app : w.title, app: w.app, icon: NSRunningApplication(processIdentifier: w.pid)?.icon,
-                         width: width, pinned: held != nil, tag: held?.tag)
+                         width: width, held: held != nil, tag: held?.tag)
     }
 
-    /// The window the bar acts on: the ribbon's focus, or, while the pin has focus (the ribbon has none then), the pin's shown window.
+    /// The window the bar acts on: the ribbon's focus, or, while a held column has focus (the ribbon has none then), its shown window.
     private func barWindow() -> UInt32? {
         focusedWindow(on: focusedState) ?? heldFocusedWindow()
     }
@@ -949,7 +949,7 @@ final class Controller {
         let departing = ringFocus                        // who had the focus until this plan
         overlayNav(&plan, st, skipMoves: skipMoves)      // a sideways slide goes through the overlay: the moves leave the plan
         if nav?.uuid == st.info.uuid { overlay.raise(plan.focus ?? focusedByEngine) }       // the focused window is on top when two pass each other
-        notePin(plan, st)                                // the tab bars are clipped beside this plan's pin
+        notePin(plan, st)                                // the tab bars are clipped beside this plan's held column
         updateTabBars(plan, st)
         st.desktop = plan.map.desktop
         if isFocused { menu.setDesktop(plan.map.desktop); parkKeyboardFocusIfEmpty(plan, st) }
@@ -968,10 +968,7 @@ final class Controller {
             plan.showMap = true
         }
         var raiseAfter: (@MainActor () -> Void)?
-        if plan.frames.contains(where: { $0.isPinned && $0.onScreen }) {
-            let gliding = !glide.isEmpty
-            raiseAfter = { [weak self] in self?.raisePinnedAfterFocus(gliding: gliding) }
-        }
+        if let after = heldAfterFocus(plan, gliding: !glide.isEmpty) { raiseAfter = after }
         SwipeStats.shared?.navMark("apply_pre")          // QA: where the main thread spends the time between the key and the first frame
         applier.apply(plan, elements: tracker.elements, glide: glide, before: before, visible: st.info.visible, afterFocus: raiseAfter)
         if case let out = floatOut.filter({ $0.id != dragger.active }), !out.isEmpty { applier.rewrite(out, elements: tracker.elements) }
@@ -1037,7 +1034,7 @@ final class Controller {
 
     /// Keyboard moves slide: every window of the plan that keeps its size and only moves (or parks / appears at an edge) rides
     /// the strip on the display link, all on one clock (`SwipeWriter.glide`). Everything else jumps through `FrameApplier`:
-    /// size changes, desktop switches, new windows, pinned frames, Reduce Motion, a swipe or the snapshot overlay in progress.
+    /// size changes, desktop switches, new windows, held frames, Reduce Motion, a swipe or the snapshot overlay in progress.
     /// A plan that resizes a window the user can see glides nothing: the neighbours that made room for it, or fill the room it
     /// leaves, move in the same step as its edge (they overlapped it for the length of a glide).
     /// A lone window (a snap back, forced to `jump`) still glides, from where the user left it.
@@ -1136,7 +1133,7 @@ final class Controller {
     }
 
     /// One display frame of a followed floating window. A move only shifts the ring's panel (like a direct-mode swipe) and the
-    /// dim's cutout; the first frame and a resize take the full refresh, without the pin's curtain, which is placed at the end.
+    /// dim's cutout; the first frame and a resize take the full refresh, without a Plus feature's chrome, which is placed at the end.
     private func followTick() {
         let id = follow.id
         let frame = id.flatMap { tracker.windows[$0] != nil && !paused ? tracker.serverFrame($0) : nil }
@@ -1180,7 +1177,7 @@ final class Controller {
         apply(st.engine.handle(.command("focus_window", arg: Int(id))), on: u, showMap: false)
     }
 
-    /// A tab's own menu, ✕ / detach button, drag or modifier-click. A pinned group's tabs reorder and pop out through the pin
+    /// A tab's own menu, ✕ / detach button, drag or modifier-click. A held column's tabs reorder and pop out through it
     /// (it is not a ribbon column); the rest of what a tab can do is the same for both.
     private func tabAction(_ a: TabAction) {
         guard !paused else { return }
@@ -1198,7 +1195,7 @@ final class Controller {
         }
     }
 
-    /// Focus the tab's window first: `pin` and its siblings act on the focused column (or on the pin once it has focus).
+    /// Focus the tab's window first: a feature's commands act on the focused column (or on a held column once it has focus).
     private func focusThen(_ id: UInt32, _ name: String, arg: Int? = nil) {
         guard let u = home[id], let st = states[u] else { return }
         setFocusedDisplay(u)
@@ -1274,13 +1271,13 @@ final class Controller {
     }
 
     /// The columns on screen as the drop rule sees them, from the core's current plan of the window's own ribbon: the visible
-    /// columns and the pinned one (frames and tab bar from the plan's pinned entries), and where the dragged window sits.
+    /// columns, a column held outside the ribbon (Plus) if there is one, and where the dragged window sits.
     private func dragLayout(for id: UInt32) -> WindowDragger.Layout? {
         guard let st = state(of: id) else { return nil }
         // The plan read at the press, if nothing was applied since; else ask the core.
         let plan = dragWarm.flatMap { $0.uuid == st.info.uuid ? $0.plan : nil } ?? st.engine.handle(.query, log: false)
         let l = DropLayout.build(from: plan, dragging: id)
-        return WindowDragger.Layout(columns: l.columns, usable: st.info.visible, gap: CGFloat(settings.gap), source: l.source, pinSource: l.pinSource,
+        return WindowDragger.Layout(columns: l.columns, usable: st.info.visible, gap: CGFloat(settings.gap), source: l.source, held: l.held,
                                     display: st.info.uuid)
     }
 
@@ -1315,7 +1312,7 @@ final class Controller {
             plan.changed = [id]; plan.focus = nil; plan.jump = true
             apply(plan, on: st.info.uuid, showMap: false)
         case .drop(let t):
-            // A ribbon column by number (position: before, after, into or tabs), or the pin (`pin: true`, position into or tabs).
+            // A ribbon column by number (position: before, after, into or tabs), or a held column (Plus) by its own argument.
             guard let json = DropTarget.moveEvent(t.moveArg(id: id)) else { return }
             apply(st.engine.handle(rawJSON: json), on: st.info.uuid)
         }
@@ -1518,7 +1515,7 @@ final class Controller {
     private func alignCoreToOverlay() {
         overlay.freeze()
         let plan = engine.handle(.query, log: false)
-        guard let f = plan.frames.first(where: { !$0.isPinned && $0.logicalX != nil && overlay.currentX($0.id) != nil }),     // the pin never moves
+        guard let f = plan.frames.first(where: { !$0.isPinned && $0.logicalX != nil && overlay.currentX($0.id) != nil }),     // a held window never moves
               let have = overlay.currentX(f.id), let want = f.logicalX else { return }
         if abs(have - want) >= 0.5 { _ = engine.handle(.scrollTo(f.id, x: have), log: false) }
     }
@@ -1532,21 +1529,19 @@ final class Controller {
     }
 
     /// The tiled windows of a plan as the overlay draws them, at their logical rects: tabbed columns show their active tab only
-    /// (the others share its place and would be drawn on top of it), and the pin's edge is where ribbon tiles go beneath it.
+    /// (the others share its place and would be drawn on top of it), and a held column's edge (Plus) is where ribbon tiles go
+    /// beneath it.
     private func navLayout(of plan: Plan, display disp: CGRect) -> NavLayout {
         var hidden = Set<UInt32>()
-        for c in plan.map.columns + (plan.map.pin.map { [$0.column] } ?? []) where c.tabbed {
+        for c in plan.map.columns + plan.map.heldColumns where c.tabbed {
             for (i, w) in c.windows.enumerated() where i != (c.active ?? 0) { hidden.insert(w.id) }
         }
         var specs: [SwipeOverlay.TileSpec] = []
-        var shownPin: CGRect?
         for f in plan.frames {
             guard let r = f.logicalRect, !hidden.contains(f.id), let w = tracker.windows[f.id], tracker.elements[f.id] != nil, !w.floating else { continue }
-            specs.append(.init(id: f.id, rect: r, pid: w.pid, pinned: f.isPinned))
-            if f.isPinned, f.onScreen { shownPin = shownPin ?? r }          // the pinned window that shows (a tabbed pin shows one)
+            specs.append(.init(id: f.id, rect: r, pid: w.pid, held: f.isPinned))
         }
-        let bar = plan.tabBars.first { $0.isPinned && $0.onScreen }?.cg.offsetBy(dx: -disp.minX, dy: -disp.minY)
-        let edge = overlayEdge(plan, shownPin: shownPin, bar: bar, display: disp)
+        let edge = overlayEdge(plan, specs: specs, display: disp)
         return NavLayout(desktop: plan.map.desktop, specs: specs, edge: edge, hidden: hidden)
     }
 
@@ -1766,7 +1761,7 @@ final class Controller {
         if let stats = SwipeStats.shared {
             stats.firstMove(now); stats.overlayFrame(now)
             statsFinger += dx
-            if statsRef == nil, let id = plan.frames.filter({ !$0.isPinned && $0.logicalX != nil }).map(\.id).min() { statsRef = (id, (xs[id] ?? 0) + statsFinger) }   // the pin never follows the fingers
+            if statsRef == nil, let id = plan.frames.filter({ !$0.isPinned && $0.logicalX != nil }).map(\.id).min() { statsRef = (id, (xs[id] ?? 0) + statsFinger) }   // a held window never follows the fingers
             if let r = statsRef, let x = xs[r.id] { stats.position(layer: x, want: r.x0 - statsFinger, at: now) }
         }
         if plan.showMap { swipeMap = plan.map }
@@ -1922,7 +1917,7 @@ final class Controller {
         }
         stats?.navMark("revealed")
         if settings.focusRing, ring.windowNumber != nil { overlay.ring(from: ringFocus, to: plan.focus ?? ringFocus, now: now) } else { overlay.removeRing() }
-        let lead = (plan.focus.flatMap { id in slide.staging.first { $0.id == id && !$0.pinned } } ?? slide.staging.first { !$0.pinned && abs((slide.finals[$0.id] ?? $0.rect.minX) - $0.rect.minX) >= 1 })?.id
+        let lead = (plan.focus.flatMap { id in slide.staging.first { $0.id == id && !$0.held } } ?? slide.staging.first { !$0.held && abs((slide.finals[$0.id] ?? $0.rect.minX) - $0.rect.minX) >= 1 })?.id
         stats?.navStart(x: lead.flatMap { overlay.currentX($0) })
         overlay.settle(to: slide.finals, velocity: 0, now: now)
         stats?.navMark("tiles_moving")
@@ -2114,7 +2109,7 @@ final class Controller {
     private func focusedWindow(on st: DisplayState) -> UInt32? {
         if let r = ringFocus, home[r] == st.info.uuid, tracker.windows[r] != nil { return r }
         let map = st.engine.handle(.query).map
-        if map.pinFocused, let id = map.pin?.column.lead { return id }
+        if let id = heldLead(map) { return id }
         return map.focusedIndex.flatMap { map.columns.indices.contains($0) ? map.columns[$0].windows.first?.id : nil }
     }
 
@@ -2158,12 +2153,10 @@ final class Controller {
     private func focusDisplay(_ dst: DisplayState, entering dir: DisplayDirection?) {
         let map = dst.engine.handle(.query).map
         let visible = map.columns.filter(\.visible)
-        // A column pinned to the entry edge is the first thing there.
-        let pinned = map.pin.flatMap { p in p.column.lead.map { (p.side, $0) } }
         var id: UInt32?
         switch dir {
-        case .right?: id = pinned?.0 == .left ? pinned?.1 : visible.first?.windows.first?.id
-        case .left?: id = pinned?.0 == .right ? pinned?.1 : visible.last?.windows.first?.id
+        case .right?: id = heldEntry(map, from: .left) ?? visible.first?.windows.first?.id
+        case .left?: id = heldEntry(map, from: .right) ?? visible.last?.windows.first?.id
         default: id = focusedWindow(on: dst)
         }
         setFocusedDisplay(dst.info.uuid)
@@ -2197,7 +2190,7 @@ final class Controller {
         case "focus_previous":
             // Inside a tabbed column ⌃⌥Tab steps to the next tab; everywhere else it is "back to the last window".
             let m = engine.handle(.query, log: false).map
-            let tabbed = m.pinFocused ? m.pin?.column.tabbed == true : m.focusedIndex.map { m.columns.indices.contains($0) && m.columns[$0].tabbed } ?? false
+            let tabbed = heldTabbed(m) ?? m.focusedIndex.map { m.columns.indices.contains($0) && m.columns[$0].tabbed } ?? false
             if tabbed { send(.command("next_tab")) } else { send(.command(name)) }
         case "toggle_dim":
             let on = settings.otherWindows == OtherWindows.dim.rawValue
@@ -2284,7 +2277,7 @@ final class Controller {
             focusSession = .follow; syncFocusMenu()
         }
         // Gap, default width, placement, scroll mode and width steps all go live over the layout as it is: stacks, tabs,
-        // widths, floating windows and the pin stay where they are. (Replaying the windows here rebuilt every ribbon from
+        // widths, floating windows and held columns stay where they are. (Replaying the windows here rebuilt every ribbon from
         // scratch and threw all of that away.) Before start or while paused the engines only take the values.
         let live = liveEngineConfig
         if live != liveBefore {
@@ -2342,7 +2335,7 @@ final class Controller {
         let multi = states.count > 1
         // Most recently focused first; the current window goes last (you are already there).
         let rank = { (id: UInt32) in self.focusOrder.firstIndex(of: id) ?? Int.max - 1 }
-        let windows = plans.flatMap { st, p in (p.map.columns.flatMap(\.windows) + (p.map.pin?.column.windows ?? [])).map { (st, $0) } }
+        let windows = plans.flatMap { st, p in (p.map.columns + p.map.heldColumns).flatMap(\.windows).map { (st, $0) } }
             .sorted { rank($0.1.id) < rank($1.1.id) }
         // Where each window sits: "Column 3", "Column 3, below Notes", "Tab 2 in column 4". Every tab is a jumpable window of its own.
         var place: [UInt32: String] = [:]
@@ -2395,7 +2388,7 @@ final class Controller {
             let m = st.engine.handle(.query).map
             let i = st.info
             return ["uuid": i.uuid, "name": i.name, "frame": [i.frame.minX, i.frame.minY, i.frame.width, i.frame.height],
-                    "desktop": m.desktop, "windows": m.columns.flatMap(\.windows).map(\.id), "pinned": m.pin?.column.windows.map(\.id) ?? []]
+                    "desktop": m.desktop, "windows": m.columns.flatMap(\.windows).map(\.id), "pinned": m.heldColumns.flatMap(\.windows).map(\.id)]
         }
         let chain2: [String: Any] = [
             "ring": ring.windowNumber != nil, "ringPhase": "\(ringPhase.phase)", "dim": dim.isShowing, "overlay": dim.debugKind, "focusMode": focusSession == .on, "dimHoles": dim.debugState.map { [$0.frame.minX, $0.frame.minY, $0.frame.width, $0.frame.height] + ($0.hole.map { [$0.minX, $0.minY, $0.width, $0.height] } ?? []) },

@@ -209,6 +209,8 @@ struct RibbonMap: Codable {
     /// Window ids of the pinned column.
     var pinnedIDs: Set<UInt32> { Set(pin?.column.windows.map(\.id) ?? []) }
     var pinFocused: Bool { pin?.column.focused == true }
+    /// The columns held outside the ribbon on this desktop (`pin`'s, if any): what "every window on the display" adds to `columns`.
+    var heldColumns: [MapColumn] { pin.map { [$0.column] } ?? [] }
 }
 struct Plan: Codable {
     var frames: [PlanFrame]

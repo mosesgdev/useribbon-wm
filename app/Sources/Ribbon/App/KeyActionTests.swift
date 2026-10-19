@@ -65,7 +65,6 @@ enum KeyActionTests {
         defer { d.removePersistentDomain(forName: suite) }
         let store = ShortcutStore(defaults: d, layout: [:], translate: { _ in nil }, systemKeys: { [] })
         let ribbonTarget = BarTarget(id: 1, title: "Notes window", app: "Notes", icon: nil, width: 0.5)
-        let pinnedTarget = BarTarget(id: 3, title: "Inbox", app: "Buzz", icon: nil, width: 0.25, pinned: true)
         let rows = BarModel.actions(store: store, target: ribbonTarget)
         let byTitle = Dictionary(rows.map { ($0.title, $0) }, uniquingKeysWith: { a, _ in a })
         let wanted = ["Move column to the start", "Move column to the end", "Nudge wider", "Nudge narrower", "Nudge taller", "Nudge shorter",
@@ -79,10 +78,6 @@ enum KeyActionTests {
               "command bar: a width nudge names the window and its width, and is told apart from the next-width action")
         check(wanted.allSatisfy { byTitle[$0]?.actsOnWindow == true }, "command bar: they act on the window in front")
         check(Set(rows.map(\.title)).count == rows.count, "command bar: titles stay unique")
-        let pinned = Set(BarModel.actions(store: store, target: pinnedTarget).map(\.title))
-        check(["Move column to the start", "Move column to the end", "Stack with the window on the right"].allSatisfy { !pinned.contains($0) }
-              && ["Nudge wider", "Nudge narrower", "Nudge taller", "Nudge shorter", "Move window up", "Move window down"].allSatisfy(pinned.contains),
-              "command bar: a pinned window loses the column moves and keeps what works inside the pin")
         let m = BarModel(all: [], target: ribbonTarget)
         func goes(_ q: String, to n: Int?, in model: BarModel) -> Bool {
             model.query = q
@@ -97,7 +92,6 @@ enum KeyActionTests {
               "command bar: the row's own title, “go to window 3”, offers it too")
         check(goes("window 0", to: nil, in: m) && goes("window 10", to: nil, in: m) && goes("window", to: nil, in: m) && goes("desk 3", to: nil, in: m) && goes("wid 75", to: nil, in: m),
               "command bar: a number outside 1…9, no number, or another verb offers none")
-        check(goes("window 4", to: 4, in: BarModel(all: [], target: pinnedTarget)), "command bar: a pinned window can go to a ribbon window too")
     }
 
     private static func engine(_ check: (Bool, String) -> Void) {

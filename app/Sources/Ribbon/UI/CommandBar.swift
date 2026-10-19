@@ -19,7 +19,7 @@ struct BarTarget {
     var width: Double? = nil
     /// The window is in a column held outside the ribbon (a Plus feature's): `width` is then that column's share of the
     /// whole display, and the ribbon-only actions (stack, full width, centre, direct widths) are left out.
-    var pinned = false
+    var held = false
     /// The word the bar adds after the app's name for such a window ("Buzz · <tag>"); nil for a ribbon window.
     var tag: String? = nil
 }
@@ -146,7 +146,7 @@ final class BarModel: ObservableObject {
         let name = target?.app
         var out: [BarItem] = []
         // A window held outside the ribbon has sizes of its own, not a percentage.
-        if (verb.isEmpty && query.contains("%")) || (!verb.isEmpty && "width".hasPrefix(verb)) || verb == "w", (5...100).contains(n), target?.pinned != true {
+        if (verb.isEmpty && query.contains("%")) || (!verb.isEmpty && "width".hasPrefix(verb)) || verb == "w", (5...100).contains(n), target?.held != true {
             out.append(BarItem(id: "value:width", title: WidthPresets.title(Double(n) / 100), subtitle: name.map { "Resize \($0)" } ?? "Resize the window",
                                icon: nil, symbol: "arrow.left.and.right.square", action: .setWidth(Double(n) / 100)))
         }
@@ -296,15 +296,15 @@ final class BarModel: ObservableObject {
             (WidthPresets.title(f), "arrow.left.and.right.square", BarAction.commandArg("width_step", i + 1))
         }
         let app = target?.app ?? "the window"
-        let pinned = target?.pinned == true
+        let held = target?.held == true
         // A held column's share is measured from whole pixels (⅕ can come as 0.1999), so one at its own size is named by that size:
         // rounded down, the measured share would read one low.
-        let now = target?.width.map { f in " · now \(WidthPresets.percent(pinned ? registry.nominalHeldWidth(f) : f))" } ?? ""
+        let now = target?.width.map { f in " · now \(WidthPresets.percent(held ? registry.nominalHeldWidth(f) : f))" } ?? ""
         let details = baseDetails.merging(registry.barDetails) { mine, _ in mine }
         let standIns = registry.standInTitles, keywords = registry.barKeywords
         return (registry.barRows(merging: baseSpecs) + widths).filter { !$0.0.hasSuffix("other display") || NSScreen.screens.count > 1 }
             .filter { target == nil || !standIns.contains($0.0) }   // a window in front gets the rows its feature makes for it
-            .filter { !pinned || !$0.2.isRibbonOnly }.map { spec in
+            .filter { !held || !$0.2.isRibbonOnly }.map { spec in
             var detail = details[spec.0].map { $0.replacingOccurrences(of: "%@", with: app) } ?? ""
             if case .commandArg("width_step", _) = spec.2 { detail = "Resize \(app)" }
             if ["Make wider", "Make narrower", "Nudge wider", "Nudge narrower"].contains(spec.0) || detail.hasPrefix("Resize") { detail += now }

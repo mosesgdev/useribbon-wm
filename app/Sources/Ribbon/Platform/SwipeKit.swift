@@ -525,7 +525,7 @@ struct NavLayout: Equatable {
         var out = Slide(staging: [], add: [], finals: [:], seen: [])
         var visible = false
         for n in new.specs {
-            guard let o = was[n.id], o.pinned == n.pinned, o.pid == n.pid,
+            guard let o = was[n.id], o.held == n.held, o.pid == n.pid,
                   abs(o.rect.width - n.rect.width) < 0.5, abs(o.rect.height - n.rect.height) < 0.5, abs(o.rect.minY - n.rect.minY) < 0.5 else { return nil }
             let from = layers[n.id]?.minX ?? o.rect.minX
             let w = n.rect.width, lo = min(from, n.rect.minX), hi = max(from, n.rect.minX) + w

@@ -99,9 +99,15 @@ A shared file never edits a menu, a table or a list for a Plus feature. `App/Fea
    a free build gets exactly the built-in rows.
 
 Pieces a feature has to draw *into* (the tab bar's button, the strip's tile, the toast's sketch, the swipe overlay's blur strip, what the
-Controller does for a pinned column) go through a type or method that Plus/ and Free/ both declare (`PinTabButton`, `TabMenuFeature`,
+Controller does for a pinned column) go through a type or method that Plus/ and Free/ both declare (`HeldBarButton` and `TabMenuFeature`,
 `PlusToast`/`PlusDiagram`, `OverlayEdge`/`PinEdge`, `PinState` and the `Controller` hooks of `Plus/ControllerPin.swift` and
-`Free/FreeControllerPin.swift`, the strip's `heldCaption`/`pinTile` in `PinHUD.swift`/`FreePinHUD.swift`).
+`Free/FreeControllerPin.swift`, the strip's `HeldTile`/`HeldHit`/`HeldLanding`/`HeldArg` and `heldCaption`/`heldBlock` in
+`PinHUD.swift`/`FreePinHUD.swift`, the window drag's `HeldDrop`/`HeldDropColumn` in `PinDrop.swift`/`FreePinDrop.swift`).
+
+Where a shared enum needs a case only Plus can produce, it has one neutral case whose payload is a Plus type (`DropTarget.held(HeldDrop)`,
+`HUDDrop.held(HeldLanding)`, `HUDHit.held(HeldHit)`, `CmdArg.held(HeldArg)`); the Free twin of the payload is an uninhabited enum, so a
+free build can never make one and its `switch`es on it are empty. Plus keeps the old spellings (`.pinTabs`, `.pin(row:)`, `.pinInto`, …)
+as static members in Plus files, so its code and tests read as before.
 
 Saved state follows the same rule. A shortcut override saved for an action the running edition has no row for (a Plus build wrote it) is
 kept in the saved file, but is no row and no count (`ShortcutStore` keeps it aside and writes it back), so a file written by a Plus build
@@ -151,10 +157,17 @@ scripts/check-public-build.sh  # the public tree: export-public.sh of HEAD, then
 
 ## What is shared on purpose
 
-Code that only reads a feature's optional data and does nothing without it stays shared: the wire types (`CorePin`, `MapPin`,
-`SavedPin`, `PlanFrame.pinned`), the strip's geometry (`HUDStrip`), the drop rule and its marks, `TabLayout`'s button metrics and the
-swipe writer's release. They draw and say nothing without a pin; moving them would mean rewriting the shared algorithms they sit in.
-Their checks stay and run in both editions. Everything that draws, words, offers or routes the pin is in `Plus/`.
+Code that only carries a feature's optional data and does nothing without it stays shared:
+
+- the wire and session types (`CorePin`, `MapPin`, `SavedPin`, `PlanFrame.pinned`, `TabBar.pinned`, `SessionFile.pin`) and
+  `RibbonMap.heldColumns`, so a file or message a Plus build wrote loads in free;
+- the algorithms that hold a column's flag as data: the tab bars' riding and placement (`isPinned` on a bar, its slot), the swipe
+  overlay's `held` tile and its dim, `PinEdge` in the swipe writer's release, and the command bar's `BarTarget.held` filter;
+- `TabLayout`, the drop rule and the strip, in neutral terms: a bar's `trailing` room, a held column passed in as `HeldDropColumn?`, the
+  strip's `HeldTile?`. In free those are always 0 or nil.
+
+Their checks run in both editions (with held data built by hand). Everything that draws, words, offers, hit-tests, picks a drop target
+for or routes the pin is in `Plus/`, with its checks in Plus test files registered through `PinFeature.selfTests`.
 
 ## Exporting the public repo
 

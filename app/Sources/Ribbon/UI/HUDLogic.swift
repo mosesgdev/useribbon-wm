@@ -10,12 +10,11 @@ enum CmdArg: Equatable, Encodable {
     case double(Double)
     /// `move_to_index`'s {"id", "index"}.
     case move(id: UInt32, index: Int)
-    /// `move_window_to` into the pinned column: {"id", "pin": true, "position": "tabs"}.
-    case pinInto(id: UInt32, position: String)
+    /// `move_window_to` into a column held outside the ribbon (Plus): its own argument.
+    case held(HeldArg)
     /// `move_window_to` at a ribbon column (1-based, as the map shows it): {"id", "column", "position": "before" | "after" | ...}.
     case moveTo(id: UInt32, column: Int, position: String)
 
-    private struct PinInto: Encodable { var id: Int; var pin: Bool; var position: String }
     private struct MoveTo: Encodable { var id: Int; var column: Int; var position: String }
 
     func encode(to encoder: Encoder) throws {
@@ -24,7 +23,7 @@ enum CmdArg: Equatable, Encodable {
         case .int(let n): try c.encode(n)
         case .double(let d): try c.encode(d)
         case .move(let id, let index): try c.encode(["id": Int(id), "index": index])
-        case .pinInto(let id, let position): try c.encode(PinInto(id: Int(id), pin: true, position: position))
+        case .held(let a): try c.encode(a)
         case .moveTo(let id, let column, let position): try c.encode(MoveTo(id: Int(id), column: column, position: position))
         }
     }
@@ -38,29 +37,26 @@ struct HUDCommand: Equatable {
 }
 
 /// An in-flight tile drag: which column, and how far the pointer has moved horizontally.
-/// The pinned tile has no ribbon column: `from` is -1 and `pinRow` names the window of it that was grabbed.
+/// A held column's tile (Plus) has no ribbon column: `from` is -1 and `held` names the window of it that was grabbed.
 struct HUDDrag: Equatable {
     var from: Int
     var dx: CGFloat
-    var pinRow: Int? = nil
-    var isPin: Bool { pinRow != nil }
-    static func pinned(row: Int, dx: CGFloat) -> HUDDrag { HUDDrag(from: -1, dx: dx, pinRow: row) }
+    var held: HeldHit? = nil
 }
 
 /// Where a drag would land if it were let go now.
 enum HUDDrop: Equatable {
     /// A ribbon tile takes this slot of the ribbon.
     case slot(Int)
-    /// A ribbon tile is over the pinned tile: its windows join the pin.
-    case pin
-    /// The pinned tile leaves the pin for this slot of the ribbon (the count = the end).
-    case ribbon(Int)
-    /// Nothing to do: the pinned tile is still over its own place.
+    /// Somewhere a held column (Plus) decides: into it, or out of it into the ribbon.
+    case held(HeldLanding)
+    /// Nothing to do.
     case stay
 }
 
 enum HUDPointerEvent { case move, down, drag, up, exit }
-enum HUDHit: Equatable { case window(col: Int, row: Int), pin(row: Int), dot(Int) }
+/// What the pointer is on: a ribbon window, a window of a held column's tile (Plus), or a desktop dot.
+enum HUDHit: Equatable { case window(col: Int, row: Int), held(HeldHit), dot(Int) }
 
 /// How big the strip draws (Settings → General). Small is the slim 78pt strip; Medium, the default, is 1.25× and Large 1.5×.
 enum StripSize: String, CaseIterable, Identifiable {
@@ -95,8 +91,6 @@ enum HUDLayout {
     static var dotCell: CGFloat { u(16) }
     /// Tiles take hits a little above their top edge, so the pill's padding is not a dead zone.
     static var hitTop: CGFloat { u(4) }
-    /// The pinned tile never gets narrower than 34 (the mock's), and the gap between it and the track holds the pin glyph.
-    static var minPinW: CGFloat { u(34) }; static var pinGap: CGFloat { u(20) }; static var pinGlyphFont: CGFloat { u(11) }
 
     // Drawing only: type, rings, badge, dots and shadows follow the same size.
     /// Caption: the window's name, then "6/10" (or the empty desktop's hint), `captionGap` apart.
@@ -121,9 +115,6 @@ enum HUDLayout {
     static var clipRoom: CGFloat { u(60) }; static var clipRoomOver: CGFloat { u(8) }; static var clipRoomV: CGFloat { u(30) }
 
     static func tileWidth(frac: Double) -> CGFloat { min(max((CGFloat(frac) * ptPerFrac).rounded(), minTileW), maxTileW) }
-    /// The pin's fraction counts the whole display, the ribbon's tiles the band beside it: on the ribbon's scale the pin is
-    /// `f / (1 - f)` of a full band, so a ¼ pin draws like a ⅓-wide column.
-    static func pinTileWidth(frac: Double) -> CGFloat { max(minPinW, tileWidth(frac: frac / max(1 - frac, 0.01))) }
     static func pillHeight(hasTiles: Bool) -> CGFloat { hasTiles ? padTop + tileH + railGap + footH + padBottom : 2 * emptyPadV + footH }
     /// Height of one window's sliver when a column stacks `rows` of them (40 / 19 at Small).
     static func sliverH(_ rows: Int) -> CGFloat { rows <= 1 ? tileH : (tileH - stackGap * CGFloat(rows - 1)) / CGFloat(rows) }
@@ -229,61 +220,32 @@ enum HUDLayout {
         return moveCommands(columns: ids, from: from, to: to, focus: lead)
     }
 
-    /// Where a drag lands if let go now. A ribbon tile whose centre is over the pinned tile (or past the half of the glyph's gap
-    /// toward it) joins the pin; otherwise it takes the slot nearest it. The pinned tile, once its centre leaves its own side of
-    /// that gap, lands before the ribbon tiles whose centres it has passed. Both read the raw pointer, as drops always have.
+    /// Where a drag lands if let go now: the slot whose final position is nearest the dragged tile, unless a held column (Plus)
+    /// claims the drop. Both read the raw pointer, as drops always have.
     static func drop(_ d: HUDDrag, _ g: HUDStrip) -> HUDDrop {
-        if d.isPin {
-            guard let pin = g.pin, g.hasTrack else { return .stay }
-            let cx = g.pinX + pin.w / 2 + d.dx
-            if g.overPin(cx) { return .stay }
-            return .ribbon(g.tiles.indices.filter { g.centre(of: $0) < cx }.count)
-        }
+        if let h = d.held { return h.drop(dx: d.dx, g) }
         guard g.tiles.indices.contains(d.from) else { return .stay }
-        if g.overPin(g.centre(of: d.from) + d.dx) { return .pin }
+        if let l = g.held?.landing(from: d.from, dx: d.dx, g) { return .held(l) }
         return .slot(slotIndex(from: d.from, dx: d.dx, widths: g.tiles.map(\.w)))
     }
 
-    /// Slots a ribbon tile slides while something is dragged: the tiles passed make room for a reorder, the tiles from the
-    /// landing slot on make room for a window leaving the pin, and the tiles behind a column headed for the pin close up.
+    /// Slots a ribbon tile slides while something is dragged: the tiles passed make room for a reorder (a held column's landing
+    /// says its own).
     static func slide(of i: Int, drag d: HUDDrag, drop: HUDDrop) -> Int {
         switch drop {
         case .slot(let to): return shift(of: i, from: d.from, to: to)
-        case .ribbon(let at): return i >= at ? 1 : 0
-        case .pin: return i > d.from ? -1 : 0
+        case .held(let l): return l.slide(of: i, from: d.from)
         case .stay: return 0
         }
     }
 
-    /// Commands for letting go of `d`: a reorder, the column's windows joining the pin (`move_window_to` with `pin`, as tabs),
-    /// or the grabbed window of the pin landing in the ribbon (the core takes it out of the pin on its own).
+    /// Commands for letting go of `d`: a reorder, or what a held column's landing sends.
     static func dropCommands(map: RibbonMap, focusID: UInt32?, drag d: HUDDrag) -> [HUDCommand] {
         switch drop(d, HUDStrip(map: map, focusID: focusID)) {
         case .stay: return []
         case .slot(let to): return moveCommands(map: map, focusID: focusID, from: d.from, to: to)
-        case .pin: return pinCommands(map: map, focusID: focusID, from: d.from)
-        case .ribbon(let at): return leavePinCommands(map: map, row: d.pinRow ?? 0, at: at)
+        case .held(let l): return l.commands(map: map, focusID: focusID, drag: d)
         }
-    }
-
-    /// Column `from` joins the pinned column, every window as a tab. The one the column shows (its active tab, its focused
-    /// window) goes last, so it is the tab the pin ends up on.
-    static func pinCommands(map: RibbonMap, focusID: UInt32?, from: Int) -> [HUDCommand] {
-        guard map.pin != nil, map.columns.indices.contains(from) else { return [] }
-        let c = map.columns[from]
-        let lead = c.tabbed ? c.active.flatMap { c.windows.indices.contains($0) ? c.windows[$0].id : nil }
-                            : focusID.flatMap { id in c.windows.contains { $0.id == id } ? id : nil }
-        let ids = c.windows.map(\.id)
-        let ordered = lead.map { l in ids.filter { $0 != l } + [l] } ?? ids
-        return ordered.map { HUDCommand("move_window_to", .pinInto(id: $0, position: "tabs")) }
-    }
-
-    /// The pin's window at `row` lands in the ribbon before column `at` (0-based), or after the last one.
-    static func leavePinCommands(map: RibbonMap, row: Int, at: Int) -> [HUDCommand] {
-        guard let pin = map.pin, pin.column.windows.indices.contains(row), !map.columns.isEmpty else { return [] }
-        let id = pin.column.windows[row].id
-        if at < map.columns.count { return [HUDCommand("move_window_to", .moveTo(id: id, column: at + 1, position: "before"))] }
-        return [HUDCommand("move_window_to", .moveTo(id: id, column: map.columns.count, position: "after"))]
     }
 
     /// What is under `p` (pill coordinates, top-left origin). Reads the same `HUDStrip` the view draws from.
@@ -291,10 +253,7 @@ enum HUDLayout {
     static func hit(_ p: CGPoint, map: RibbonMap, focusID: UInt32?) -> HUDHit? {
         let g = HUDStrip(map: map, focusID: focusID)
         if g.hasTiles, p.y >= padTop - hitTop, p.y < g.footTop {
-            if let pin = g.pin, p.x >= g.pinX, p.x < g.pinX + pin.w {
-                guard pin.rows.count > 1 else { return pin.rows.first.map { .pin(row: $0) } }
-                return .pin(row: pin.rows[stackRow(p.y, rows: pin.rows.count)])
-            }
+            if let h = g.held, h.covers(p.x, g) { return h.hit(p) }
             if g.hasTrack, p.x >= g.viewX, p.x < g.viewX + g.viewW {
                 let tx = p.x - g.viewX + g.shift
                 guard let c = g.tiles.firstIndex(where: { tx >= $0.x - gap / 2 && tx < $0.x + $0.w + gap / 2 }) else { return nil }
@@ -334,30 +293,26 @@ struct HUDStrip: Equatable {
     let tiles: [Tile]
     let trackW: CGFloat, viewW: CGFloat, shift: CGFloat
     let focus: Int?
-    /// The pinned column's tile (`x` is 0: it sits outside the track, held at the strip's edge), the edge it is on, and
-    /// whether it has the focus. The pin never counts toward the track's width, overflow, fades, counters or scroll.
-    let pin: Tile?
-    let pinSide: PinSide
-    let pinFocused: Bool
+    /// A column held outside the ribbon (Plus): its tile sits outside the track, at the strip's edge. It never counts toward the
+    /// track's width, overflow, fades, counters or scroll.
+    let held: HeldTile?
     let dots: Int
     let pillW: CGFloat, pillH: CGFloat
 
     private typealias L = HUDLayout
-    /// The ribbon's tiles (the part that scrolls); a strip can hold only the pin.
+    /// The ribbon's tiles (the part that scrolls); a strip can hold only a held column's tile.
     var hasTrack: Bool { !tiles.isEmpty }
-    var hasTiles: Bool { hasTrack || pin != nil }
+    var hasTiles: Bool { hasTrack || held != nil }
     var over: Bool { trackW > viewW }
-    var pinLeft: Bool { pinSide == .left }
-    /// The pinned tile and the gap with its glyph (no gap when there is no track to part it from).
-    var pinBlockW: CGFloat { pin.map { $0.w + (hasTrack ? L.pinGap : 0) } ?? 0 }
-    /// The tile row (the pin, the track with its "more" slots), centred in the pill.
-    var rowW: CGFloat { viewW + (over ? 2 * L.moreW : 0) + pinBlockW }
+    /// What a held column takes of the tile row (its tile and whatever parts it from the track).
+    var heldBlockW: CGFloat { held?.blockW(hasTrack: hasTrack) ?? 0 }
+    /// Is the held column's tile before the track (at the left)?
+    var heldLeads: Bool { held?.leads == true }
+    /// The tile row (a held tile, the track with its "more" slots), centred in the pill.
+    var rowW: CGFloat { viewW + (over ? 2 * L.moreW : 0) + heldBlockW }
     var railX: CGFloat { (pillW - rowW) / 2 }
     /// Left edge of the clip box the tiles show through (pill coordinates).
-    var viewX: CGFloat { railX + (pin != nil && pinLeft ? pinBlockW : 0) + (over ? L.moreW : 0) }
-    /// Left edge of the pinned tile, and of the gap that holds the pin glyph (pill coordinates).
-    var pinX: CGFloat { pinLeft ? railX : railX + rowW - (pin?.w ?? 0) }
-    var pinGapX: CGFloat { pinLeft ? pinX + (pin?.w ?? 0) : pinX - L.pinGap }
+    var viewX: CGFloat { railX + (heldLeads ? heldBlockW : 0) + (over ? L.moreW : 0) }
     var padTop: CGFloat { hasTiles ? L.padTop : L.emptyPadV }
     var padBottom: CGFloat { hasTiles ? L.padBottom : L.emptyPadV }
     /// Top of the caption line, where the dots take hits.
@@ -370,33 +325,23 @@ struct HUDStrip: Equatable {
 
     /// Centre of ribbon tile `i` as drawn (pill coordinates).
     func centre(of i: Int) -> CGFloat { viewX + tiles[i].x - shift + tiles[i].w / 2 }
-    /// Is pill x `cx` on the pin's side of the middle of the glyph's gap, i.e. over the pinned tile?
-    func overPin(_ cx: CGFloat) -> Bool {
-        guard let pin else { return false }
-        return pinLeft ? cx < pinX + pin.w + L.pinGap / 2 : cx >= pinX - L.pinGap / 2
-    }
 
     init(map: RibbonMap, focusID: UInt32?) {
-        // The pin has the focus when the focused window is one of its own; with no window to ask about, the map says.
-        let pinFocused: Bool = map.pin.map { p in
-            let ownWindow = focusID.map { id in p.column.windows.contains { $0.id == id } }
-            guard let id = focusID, ownWindow == true || HUDCaption.find(map, id) != nil else { return p.column.focused }
-            return ownWindow == true
-        } ?? false
-        let focus = pinFocused ? nil : (focusID.flatMap { HUDCaption.find(map, $0)?.0 } ?? map.focusedIndex)
+        let held = HeldTile(map: map, focusID: focusID)
+        // A held column with the focus takes it from the ribbon.
+        let focus = held?.focused == true ? nil : (focusID.flatMap { HUDCaption.find(map, $0)?.0 } ?? map.focusedIndex)
         let rows: [[Int]] = map.columns.map { L.rows(of: $0, focusID: focusID) }
         let tiles = L.tiles(widths: map.columns.map { L.tileWidth(frac: $0.widthFrac) }, rows: rows)
-        let pinTile = map.pin.map { Tile(x: 0, w: L.pinTileWidth(frac: $0.column.widthFrac), rows: L.rows(of: $0.column, focusID: focusID)) }
         let trackW = tiles.last.map { $0.x + $0.w } ?? 0
         let viewW = min(trackW, L.maxTrack)
         let dots = L.shownDesktops(map)
         self.tiles = tiles; self.trackW = trackW; self.viewW = viewW; self.focus = focus; self.dots = dots
-        self.pin = pinTile; self.pinSide = map.pin?.side ?? .left; self.pinFocused = pinFocused
+        self.held = held
         shift = L.stripShift(tiles: tiles, viewW: viewW, trackW: trackW, span: L.visibleSpan(map.columns), focus: focus)
-        let pinBlock = pinTile.map { $0.w + (tiles.isEmpty ? 0 : L.pinGap) } ?? 0
-        let rowW = viewW + (trackW > viewW ? 2 * L.moreW : 0) + pinBlock
+        let heldBlock = held?.blockW(hasTrack: !tiles.isEmpty) ?? 0
+        let rowW = viewW + (trackW > viewW ? 2 * L.moreW : 0) + heldBlock
         let footNeeds = 2 * L.padX + L.footInset + L.titleBlockMin + (dots > 0 ? L.footGap + L.dotCell * CGFloat(dots) : L.footInset)
-        let hasTiles = !tiles.isEmpty || pinTile != nil
+        let hasTiles = !tiles.isEmpty || held != nil
         pillW = hasTiles ? max(L.minPillW, rowW + 2 * L.padX, footNeeds) : max(L.emptyPillW, footNeeds)
         pillH = L.pillHeight(hasTiles: hasTiles)
     }
@@ -458,30 +403,6 @@ enum HUDCaption {
     static func find(_ map: RibbonMap, _ id: UInt32) -> (Int, MapWindow)? {
         for (i, c) in map.columns.enumerated() { if let w = c.windows.first(where: { $0.id == id }) { return (i, w) } }
         return nil
-    }
-
-    /// The window of the pinned column with this id (the pin is not in `map.columns`, so `find` never sees it).
-    static func findPinned(_ map: RibbonMap, _ id: UInt32) -> MapWindow? { map.pin?.column.windows.first { $0.id == id } }
-
-    /// The pinned column's window at `row` (a hit's row), if the map still has one there.
-    static func pinWindow(_ map: RibbonMap, row: Int) -> MapWindow? {
-        guard let ws = map.pin?.column.windows, ws.indices.contains(row) else { return nil }
-        return ws[row]
-    }
-
-    /// The window the pinned tile shows: a tab group's active tab, else the first.
-    static func pinShown(_ map: RibbonMap) -> MapWindow? {
-        guard let c = map.pin?.column, !c.windows.isEmpty else { return nil }
-        return c.windows[c.tabbed ? min(max(c.active ?? 0, 0), c.windows.count - 1) : 0]
-    }
-
-    /// The window the pin has the focus on, or nil when the focus is not in the pin. A focused window decides; the map's
-    /// own flag answers when there is none to ask about.
-    static func pinFocus(_ map: RibbonMap, _ focusID: UInt32?) -> MapWindow? {
-        guard let p = map.pin else { return nil }
-        if let id = focusID, let w = findPinned(map, id) { return w }
-        if let id = focusID, find(map, id) != nil { return nil }
-        return p.column.focused ? pinShown(map) : nil
     }
 
     /// The strip's one caption line: the name, then "6/10" (or a hovered desktop's window count). A column held outside the
